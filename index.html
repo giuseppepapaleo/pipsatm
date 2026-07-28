@@ -269,6 +269,13 @@ select.ci option{background:#13161C;color:var(--text)}
 .cta-box p{color:var(--muted);font-size:.95rem;margin-bottom:2rem}
 .btn-telegram{display:inline-flex;align-items:center;gap:.6rem;background:linear-gradient(135deg,#2AABEE,#229ED9);color:#fff;padding:1rem 2.5rem;border-radius:8px;font-size:1rem;font-weight:700;letter-spacing:.02em;transition:all .2s;box-shadow:0 4px 20px rgba(42,171,238,.25)}
 .btn-telegram:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(42,171,238,.35)}
+.policy-block{margin-bottom:1.75rem}
+.policy-block h3{font-size:1.02rem;font-weight:700;margin-bottom:.5rem;color:var(--text)}
+.policy-block p{font-size:.9rem;color:var(--muted);line-height:1.7}
+.policy-block a{color:var(--teal);text-decoration:underline}
+.policy-updated{font-size:.78rem;color:#4A5670;font-family:'Space Mono',monospace;margin-top:2rem;padding-top:1.5rem;border-top:1px solid var(--border)}
+.footer-privacy-link{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;transition:color .2s,text-decoration-color .2s}
+.footer-privacy-link:hover{color:var(--text);text-decoration-color:var(--muted)}
 
 /* ── LEAD MODAL ── */
 .lead-overlay{position:fixed;inset:0;background:rgba(4,6,10,0.82);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem}
@@ -288,6 +295,7 @@ select.ci option{background:#13161C;color:var(--text)}
 .lead-consent{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.25rem}
 .lead-consent input{margin-top:.2rem;width:16px;height:16px;flex-shrink:0;accent-color:var(--teal);cursor:pointer}
 .lead-consent-text{font-size:.76rem;color:#8A9BBF;line-height:1.5;cursor:pointer}
+.lead-consent-text a{color:var(--teal);text-decoration:underline}
 .lead-submit{width:100%;background:var(--teal);color:#080C14;border:none;padding:.85rem;border-radius:8px;font-size:.95rem;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,transform .1s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
 .lead-submit:disabled{opacity:.5;cursor:not-allowed}
 .lead-submit:hover{background:#34E0BB;transform:translateY(-1px)}
@@ -728,6 +736,45 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
 </div>
 
 <!-- ═══════════════════════════════════
+     PRIVACY POLICY
+═══════════════════════════════════ -->
+<section class="sec" id="privacy">
+  <div class="sec-label" data-t="privacyLabel">Legal</div>
+  <h2 class="sec-title" style="font-size:clamp(1.6rem,3.2vw,2.1rem)" data-t="privacyTitle">Privacy Policy</h2>
+  <p class="sec-sub" style="max-width:640px" data-t="privacySub">How PipsATM collects, uses and protects your personal data.</p>
+
+  <div class="policy-block">
+    <h3 data-t="privacyControllerTitle">Data controller</h3>
+    <p data-t="privacyControllerText">The data controller is TradingPartners S.R.L.S. For any question about this policy or your data, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyDataTitle">Data we collect</h3>
+    <p data-t="privacyDataText">When you opt in to join our Telegram community, we collect the email address and Telegram username you provide in the sign-up form.</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyBasisTitle">Purpose and legal basis</h3>
+    <p data-t="privacyBasisText">We process this data to grant you access to our Telegram community and to send you updates, offers and marketing communications related to our services (profiling), based on the explicit consent you give by checking the consent box before submitting the form (Art. 6(1)(a) GDPR).</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyStorageTitle">Where your data is stored</h3>
+    <p data-t="privacyStorageText">Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyRetentionTitle">How long we keep your data</h3>
+    <p data-t="privacyRetentionText">We keep your data for as long as you remain a member of our community or until you request its deletion, whichever comes first.</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyRightsTitle">Your rights</h3>
+    <p data-t="privacyRightsText">Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.</p>
+  </div>
+  <div class="policy-block">
+    <h3 data-t="privacyChangesTitle">Changes to this policy</h3>
+    <p data-t="privacyChangesText">We may update this policy from time to time. Any changes will be published on this page.</p>
+  </div>
+  <div class="policy-updated" data-t="privacyUpdated">Last updated: July 2026</div>
+</section>
+
+<!-- ═══════════════════════════════════
      FOOTER
 ═══════════════════════════════════ -->
 <!-- ═══════════════════════════════════
@@ -753,7 +800,7 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
       <div class="lead-field">
         <label class="lead-consent">
           <input type="checkbox" id="leadConsent">
-          <span class="lead-consent-text" data-t="leadConsentText">I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the Privacy Policy.</span>
+          <span class="lead-consent-text" data-t="leadConsentText">I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.</span>
         </label>
         <div class="lead-error" id="leadConsentErr" data-t="leadConsentErr">You must accept the data processing consent to continue.</div>
       </div>
@@ -775,6 +822,7 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     <span>— TradingPartners S.R.L.S.</span>
   </div>
   <div data-t="footer">© 2026 · All rights reserved · Trading involves risk. Operate with awareness.</div>
+  <div style="margin-top:.5rem"><a href="#privacy" class="footer-privacy-link" data-t="footerPrivacyLink">Privacy Policy</a></div>
 </footer>
 
 <!-- ═══════════════════════════════════
@@ -934,7 +982,16 @@ const translations={
     leadTitle:"One last step",leadSub:"Please leave your email and Telegram username to access the PipsATM community — this step is required.",
     leadEmailLabel:"Email address",leadEmailErr:"Please enter a valid email address.",
     leadTgLabel:"Telegram username",leadTgErr:"Please enter your Telegram username.",
-    leadConsentText:"I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the Privacy Policy.",leadConsentErr:"You must accept the data processing consent to continue.",
+    leadConsentText:'I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',leadConsentErr:"You must accept the data processing consent to continue.",
+    privacyLabel:"Legal",privacyTitle:"Privacy Policy",privacySub:"How PipsATM collects, uses and protects your personal data.",
+    privacyControllerTitle:"Data controller",privacyControllerText:'The data controller is TradingPartners S.R.L.S. For any question about this policy or your data, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyDataTitle:"Data we collect",privacyDataText:"When you opt in to join our Telegram community, we collect the email address and Telegram username you provide in the sign-up form.",
+    privacyBasisTitle:"Purpose and legal basis",privacyBasisText:"We process this data to grant you access to our Telegram community and to send you updates, offers and marketing communications related to our services (profiling), based on the explicit consent you give by checking the consent box before submitting the form (Art. 6(1)(a) GDPR).",
+    privacyStorageTitle:"Where your data is stored",privacyStorageText:"Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.",
+    privacyRetentionTitle:"How long we keep your data",privacyRetentionText:"We keep your data for as long as you remain a member of our community or until you request its deletion, whichever comes first.",
+    privacyRightsTitle:"Your rights",privacyRightsText:'Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyChangesTitle:"Changes to this policy",privacyChangesText:"We may update this policy from time to time. Any changes will be published on this page.",
+    privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",
     leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
     navHome:"Home",navServices:"Services",navReviews:"Reviews",navFaq:"FAQ's",
     heroVideoBadge:"Real community",
@@ -1000,7 +1057,16 @@ const translations={
     leadTitle:"Un ultimo passo",leadSub:"Lascia la tua email e il tuo username Telegram per accedere alla community PipsATM — questo passaggio è obbligatorio.",
     leadEmailLabel:"Indirizzo email",leadEmailErr:"Inserisci un indirizzo email valido.",
     leadTgLabel:"Username Telegram",leadTgErr:"Inserisci il tuo username Telegram.",
-    leadConsentText:"Acconsento al trattamento dei miei dati personali (email e username Telegram) per finalità di profilazione e marketing, in conformità con l'Informativa Privacy.",leadConsentErr:"Devi accettare il consenso al trattamento dei dati per continuare.",
+    leadConsentText:'Acconsento al trattamento dei miei dati personali (email e username Telegram) per finalità di profilazione e marketing, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',leadConsentErr:"Devi accettare il consenso al trattamento dei dati per continuare.",
+    privacyLabel:"Note legali",privacyTitle:"Informativa sulla Privacy",privacySub:"Come PipsATM raccoglie, utilizza e protegge i tuoi dati personali.",
+    privacyControllerTitle:"Titolare del trattamento",privacyControllerText:'Il titolare del trattamento è TradingPartners S.R.L.S. Per qualsiasi domanda su questa informativa o sui tuoi dati, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyDataTitle:"Dati raccolti",privacyDataText:"Quando aderisci alla nostra community su Telegram, raccogliamo l'indirizzo email e lo username Telegram che inserisci nel modulo di iscrizione.",
+    privacyBasisTitle:"Finalità e base giuridica",privacyBasisText:"Trattiamo questi dati per darti accesso alla nostra community Telegram e per inviarti aggiornamenti, offerte e comunicazioni di marketing relative ai nostri servizi (profilazione), sulla base del consenso esplicito che presti spuntando la casella prima di inviare il modulo (art. 6.1.a GDPR).",
+    privacyStorageTitle:"Dove conserviamo i tuoi dati",privacyStorageText:"I dati inviati vengono conservati in un foglio Google Sheets accessibile solo allo staff PipsATM, ospitato sull'infrastruttura Google. Non vendiamo né condividiamo i tuoi dati con terzi per loro finalità di marketing.",
+    privacyRetentionTitle:"Per quanto tempo conserviamo i tuoi dati",privacyRetentionText:"Conserviamo i tuoi dati finché resti membro della nostra community o fino a quando non richiedi la cancellazione, a seconda di cosa avviene prima.",
+    privacyRightsTitle:"I tuoi diritti",privacyRightsText:'Ai sensi del GDPR, hai diritto di accedere, correggere, cancellare o esportare i tuoi dati, di revocare il consenso in qualsiasi momento e di opporti al trattamento. Puoi anche presentare un reclamo al Garante per la protezione dei dati personali. Per esercitare questi diritti, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyChangesTitle:"Modifiche a questa informativa",privacyChangesText:"Potremmo aggiornare periodicamente questa informativa. Eventuali modifiche saranno pubblicate in questa pagina.",
+    privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",
     leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
     navHome:"Home",navServices:"Servizi",navReviews:"Recensioni",navFaq:"FAQ",
     heroVideoBadge:"Community reale",
@@ -1066,7 +1132,16 @@ const translations={
     leadTitle:"Un último paso",leadSub:"Deja tu email y tu nombre de usuario de Telegram para acceder a la comunidad PipsATM — este paso es obligatorio.",
     leadEmailLabel:"Correo electrónico",leadEmailErr:"Introduce un correo electrónico válido.",
     leadTgLabel:"Usuario de Telegram",leadTgErr:"Introduce tu usuario de Telegram.",
-    leadConsentText:"Doy mi consentimiento para el tratamiento de mis datos personales (email y usuario de Telegram) con fines de perfilado y marketing, de acuerdo con la Política de Privacidad.",leadConsentErr:"Debes aceptar el consentimiento de tratamiento de datos para continuar.",
+    leadConsentText:'Doy mi consentimiento para el tratamiento de mis datos personales (email y usuario de Telegram) con fines de perfilado y marketing, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',leadConsentErr:"Debes aceptar el consentimiento de tratamiento de datos para continuar.",
+    privacyLabel:"Aviso legal",privacyTitle:"Política de Privacidad",privacySub:"Cómo PipsATM recopila, utiliza y protege tus datos personales.",
+    privacyControllerTitle:"Responsable del tratamiento",privacyControllerText:'El responsable del tratamiento es TradingPartners S.R.L.S. Para cualquier consulta sobre esta política o tus datos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyDataTitle:"Datos que recopilamos",privacyDataText:"Cuando te unes a nuestra comunidad de Telegram, recopilamos el correo electrónico y el nombre de usuario de Telegram que proporcionas en el formulario de registro.",
+    privacyBasisTitle:"Finalidad y base jurídica",privacyBasisText:"Tratamos estos datos para darte acceso a nuestra comunidad de Telegram y para enviarte actualizaciones, ofertas y comunicaciones de marketing relacionadas con nuestros servicios (perfilado), en base al consentimiento explícito que otorgas al marcar la casilla antes de enviar el formulario (art. 6.1.a RGPD).",
+    privacyStorageTitle:"Dónde se almacenan tus datos",privacyStorageText:"Los datos enviados se almacenan en una hoja de cálculo de Google Sheets accesible solo para el equipo de PipsATM, alojada en la infraestructura de Google. No vendemos ni compartimos tus datos con terceros para sus propios fines de marketing.",
+    privacyRetentionTitle:"Cuánto tiempo conservamos tus datos",privacyRetentionText:"Conservamos tus datos mientras seas miembro de nuestra comunidad o hasta que solicites su eliminación, lo que ocurra primero.",
+    privacyRightsTitle:"Tus derechos",privacyRightsText:'De acuerdo con el RGPD, tienes derecho a acceder, corregir, eliminar o exportar tus datos, a retirar tu consentimiento en cualquier momento y a oponerte al tratamiento. También puedes presentar una reclamación ante tu autoridad de protección de datos. Para ejercer estos derechos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyChangesTitle:"Cambios en esta política",privacyChangesText:"Podemos actualizar esta política periódicamente. Cualquier cambio se publicará en esta página.",
+    privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",
     leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
     navHome:"Inicio",navServices:"Servicios",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",
     heroVideoBadge:"Comunidad real",
@@ -1132,7 +1207,16 @@ const translations={
     leadTitle:"Une dernière étape",leadSub:"Laissez votre email et votre nom d'utilisateur Telegram pour accéder à la communauté PipsATM — cette étape est obligatoire.",
     leadEmailLabel:"Adresse email",leadEmailErr:"Veuillez saisir une adresse email valide.",
     leadTgLabel:"Nom d'utilisateur Telegram",leadTgErr:"Veuillez saisir votre nom d'utilisateur Telegram.",
-    leadConsentText:"Je consens au traitement de mes données personnelles (email et nom d'utilisateur Telegram) à des fins de profilage et de marketing, conformément à la Politique de Confidentialité.",leadConsentErr:"Vous devez accepter le consentement au traitement des données pour continuer.",
+    leadConsentText:'Je consens au traitement de mes données personnelles (email et nom d\'utilisateur Telegram) à des fins de profilage et de marketing, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',leadConsentErr:"Vous devez accepter le consentement au traitement des données pour continuer.",
+    privacyLabel:"Mentions légales",privacyTitle:"Politique de Confidentialité",privacySub:"Comment PipsATM collecte, utilise et protège vos données personnelles.",
+    privacyControllerTitle:"Responsable du traitement",privacyControllerText:'Le responsable du traitement est TradingPartners S.R.L.S. Pour toute question concernant cette politique ou vos données, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyDataTitle:"Données que nous collectons",privacyDataText:"Lorsque vous rejoignez notre communauté Telegram, nous collectons l'adresse email et le nom d'utilisateur Telegram que vous fournissez dans le formulaire d'inscription.",
+    privacyBasisTitle:"Finalité et base juridique",privacyBasisText:"Nous traitons ces données pour vous donner accès à notre communauté Telegram et pour vous envoyer des mises à jour, offres et communications marketing liées à nos services (profilage), sur la base du consentement explicite que vous donnez en cochant la case avant d'envoyer le formulaire (art. 6.1.a RGPD).",
+    privacyStorageTitle:"Où sont stockées vos données",privacyStorageText:"Les données envoyées sont stockées dans une feuille Google Sheets accessible uniquement à l'équipe PipsATM, hébergée sur l'infrastructure de Google. Nous ne vendons ni ne partageons vos données avec des tiers à des fins de marketing.",
+    privacyRetentionTitle:"Combien de temps nous conservons vos données",privacyRetentionText:"Nous conservons vos données tant que vous êtes membre de notre communauté ou jusqu'à ce que vous demandiez leur suppression, selon la première éventualité.",
+    privacyRightsTitle:"Vos droits",privacyRightsText:'Conformément au RGPD, vous avez le droit d\'accéder à vos données, de les corriger, de les supprimer ou de les exporter, de retirer votre consentement à tout moment et de vous opposer au traitement. Vous pouvez également déposer une plainte auprès de votre autorité de protection des données. Pour exercer ces droits, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyChangesTitle:"Modifications de cette politique",privacyChangesText:"Nous pouvons mettre à jour cette politique de temps à autre. Tout changement sera publié sur cette page.",
+    privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",
     leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
     navHome:"Accueil",navServices:"Services",navReviews:"Avis",navFaq:"FAQ",
     heroVideoBadge:"Communauté réelle",
@@ -1198,7 +1282,16 @@ const translations={
     leadTitle:"Ein letzter Schritt",leadSub:"Bitte hinterlasse deine E-Mail und deinen Telegram-Benutzernamen, um auf die PipsATM-Community zuzugreifen — dieser Schritt ist erforderlich.",
     leadEmailLabel:"E-Mail-Adresse",leadEmailErr:"Bitte gib eine gültige E-Mail-Adresse ein.",
     leadTgLabel:"Telegram-Benutzername",leadTgErr:"Bitte gib deinen Telegram-Benutzernamen ein.",
-    leadConsentText:"Ich stimme der Verarbeitung meiner personenbezogenen Daten (E-Mail und Telegram-Benutzername) zu Profiling- und Marketingzwecken gemäß der Datenschutzerklärung zu.",leadConsentErr:"Du musst der Datenverarbeitung zustimmen, um fortzufahren.",
+    leadConsentText:'Ich stimme der Verarbeitung meiner personenbezogenen Daten (E-Mail und Telegram-Benutzername) zu Profiling- und Marketingzwecken gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a> zu.',leadConsentErr:"Du musst der Datenverarbeitung zustimmen, um fortzufahren.",
+    privacyLabel:"Rechtliches",privacyTitle:"Datenschutzerklärung",privacySub:"Wie PipsATM deine personenbezogenen Daten erhebt, nutzt und schützt.",
+    privacyControllerTitle:"Verantwortlicher",privacyControllerText:'Verantwortlicher für die Datenverarbeitung ist TradingPartners S.R.L.S. Bei Fragen zu dieser Erklärung oder deinen Daten kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyDataTitle:"Erhobene Daten",privacyDataText:"Wenn du unserer Telegram-Community beitrittst, erheben wir die E-Mail-Adresse und den Telegram-Benutzernamen, die du im Anmeldeformular angibst.",
+    privacyBasisTitle:"Zweck und Rechtsgrundlage",privacyBasisText:"Wir verarbeiten diese Daten, um dir Zugang zu unserer Telegram-Community zu gewähren und dir Updates, Angebote und Marketingmitteilungen zu unseren Dienstleistungen zu senden (Profiling), basierend auf der ausdrücklichen Einwilligung, die du durch Ankreuzen des Kästchens vor dem Absenden des Formulars gibst (Art. 6 Abs. 1 lit. a DSGVO).",
+    privacyStorageTitle:"Wo deine Daten gespeichert werden",privacyStorageText:"Die übermittelten Daten werden in einer Google-Sheets-Tabelle gespeichert, auf die nur das PipsATM-Team Zugriff hat, gehostet auf der Infrastruktur von Google. Wir verkaufen oder teilen deine Daten nicht mit Dritten für deren eigene Marketingzwecke.",
+    privacyRetentionTitle:"Wie lange wir deine Daten speichern",privacyRetentionText:"Wir speichern deine Daten, solange du Mitglied unserer Community bist oder bis du ihre Löschung beantragst, je nachdem, was zuerst eintritt.",
+    privacyRightsTitle:"Deine Rechte",privacyRightsText:'Gemäß der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung oder Export deiner Daten, auf jederzeitigen Widerruf deiner Einwilligung und auf Widerspruch gegen die Verarbeitung. Du kannst auch eine Beschwerde bei deiner Datenschutzbehörde einreichen. Um diese Rechte auszuüben, kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyChangesTitle:"Änderungen dieser Erklärung",privacyChangesText:"Wir können diese Erklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite veröffentlicht.",
+    privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",
     leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
     navHome:"Home",navServices:"Leistungen",navReviews:"Bewertungen",navFaq:"FAQ",
     heroVideoBadge:"Echte Community",

@@ -285,7 +285,11 @@ select.ci option{background:#13161C;color:var(--text)}
 .lead-input:focus{border-color:var(--teal);box-shadow:0 0 0 3px rgba(38,201,168,.1)}
 .lead-input::placeholder{color:#4A5670;font-weight:300}
 .lead-error{font-size:.76rem;color:var(--red);margin-top:.35rem;display:none}
+.lead-consent{display:flex;align-items:flex-start;gap:.6rem;margin-bottom:.25rem}
+.lead-consent input{margin-top:.2rem;width:16px;height:16px;flex-shrink:0;accent-color:var(--teal);cursor:pointer}
+.lead-consent-text{font-size:.76rem;color:#8A9BBF;line-height:1.5;cursor:pointer}
 .lead-submit{width:100%;background:var(--teal);color:#080C14;border:none;padding:.85rem;border-radius:8px;font-size:.95rem;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:background .2s,transform .1s;margin-top:.5rem;display:flex;align-items:center;justify-content:center;gap:.5rem}
+.lead-submit:disabled{opacity:.5;cursor:not-allowed}
 .lead-submit:hover{background:#34E0BB;transform:translateY(-1px)}
 .lead-note{font-size:.72rem;color:#4A5670;text-align:center;margin-top:1rem;line-height:1.5}
 .lead-back{display:block;text-align:center;margin-top:1rem;font-size:.82rem;color:var(--muted);cursor:pointer;text-decoration:underline;text-decoration-color:transparent;transition:color .2s,text-decoration-color .2s}
@@ -746,7 +750,14 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
         <input class="lead-input" type="text" id="leadTg" placeholder="@yourusername" required>
         <div class="lead-error" id="leadTgErr" data-t="leadTgErr">Please enter your Telegram username.</div>
       </div>
-      <button type="submit" class="lead-submit">✈ <span data-t="leadSubmit">Continue to Telegram</span></button>
+      <div class="lead-field">
+        <label class="lead-consent">
+          <input type="checkbox" id="leadConsent">
+          <span class="lead-consent-text" data-t="leadConsentText">I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the Privacy Policy.</span>
+        </label>
+        <div class="lead-error" id="leadConsentErr" data-t="leadConsentErr">You must accept the data processing consent to continue.</div>
+      </div>
+      <button type="submit" class="lead-submit" id="leadSubmitBtn">✈ <span data-t="leadSubmit">Continue to Telegram</span></button>
     </form>
     <div class="lead-note" data-t="leadNote">We respect your privacy. No spam, ever.</div>
     <span class="lead-back" onclick="closeLeadModal()" data-t="leadBack">← Back</span>
@@ -923,6 +934,7 @@ const translations={
     leadTitle:"One last step",leadSub:"Please leave your email and Telegram username to access the PipsATM community — this step is required.",
     leadEmailLabel:"Email address",leadEmailErr:"Please enter a valid email address.",
     leadTgLabel:"Telegram username",leadTgErr:"Please enter your Telegram username.",
+    leadConsentText:"I consent to the processing of my personal data (email and Telegram username) for profiling and marketing purposes, in accordance with the Privacy Policy.",leadConsentErr:"You must accept the data processing consent to continue.",
     leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
     navHome:"Home",navServices:"Services",navReviews:"Reviews",navFaq:"FAQ's",
     heroVideoBadge:"Real community",
@@ -988,6 +1000,7 @@ const translations={
     leadTitle:"Un ultimo passo",leadSub:"Lascia la tua email e il tuo username Telegram per accedere alla community PipsATM — questo passaggio è obbligatorio.",
     leadEmailLabel:"Indirizzo email",leadEmailErr:"Inserisci un indirizzo email valido.",
     leadTgLabel:"Username Telegram",leadTgErr:"Inserisci il tuo username Telegram.",
+    leadConsentText:"Acconsento al trattamento dei miei dati personali (email e username Telegram) per finalità di profilazione e marketing, in conformità con l'Informativa Privacy.",leadConsentErr:"Devi accettare il consenso al trattamento dei dati per continuare.",
     leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
     navHome:"Home",navServices:"Servizi",navReviews:"Recensioni",navFaq:"FAQ",
     heroVideoBadge:"Community reale",
@@ -1053,6 +1066,7 @@ const translations={
     leadTitle:"Un último paso",leadSub:"Deja tu email y tu nombre de usuario de Telegram para acceder a la comunidad PipsATM — este paso es obligatorio.",
     leadEmailLabel:"Correo electrónico",leadEmailErr:"Introduce un correo electrónico válido.",
     leadTgLabel:"Usuario de Telegram",leadTgErr:"Introduce tu usuario de Telegram.",
+    leadConsentText:"Doy mi consentimiento para el tratamiento de mis datos personales (email y usuario de Telegram) con fines de perfilado y marketing, de acuerdo con la Política de Privacidad.",leadConsentErr:"Debes aceptar el consentimiento de tratamiento de datos para continuar.",
     leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
     navHome:"Inicio",navServices:"Servicios",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",
     heroVideoBadge:"Comunidad real",
@@ -1118,6 +1132,7 @@ const translations={
     leadTitle:"Une dernière étape",leadSub:"Laissez votre email et votre nom d'utilisateur Telegram pour accéder à la communauté PipsATM — cette étape est obligatoire.",
     leadEmailLabel:"Adresse email",leadEmailErr:"Veuillez saisir une adresse email valide.",
     leadTgLabel:"Nom d'utilisateur Telegram",leadTgErr:"Veuillez saisir votre nom d'utilisateur Telegram.",
+    leadConsentText:"Je consens au traitement de mes données personnelles (email et nom d'utilisateur Telegram) à des fins de profilage et de marketing, conformément à la Politique de Confidentialité.",leadConsentErr:"Vous devez accepter le consentement au traitement des données pour continuer.",
     leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
     navHome:"Accueil",navServices:"Services",navReviews:"Avis",navFaq:"FAQ",
     heroVideoBadge:"Communauté réelle",
@@ -1183,6 +1198,7 @@ const translations={
     leadTitle:"Ein letzter Schritt",leadSub:"Bitte hinterlasse deine E-Mail und deinen Telegram-Benutzernamen, um auf die PipsATM-Community zuzugreifen — dieser Schritt ist erforderlich.",
     leadEmailLabel:"E-Mail-Adresse",leadEmailErr:"Bitte gib eine gültige E-Mail-Adresse ein.",
     leadTgLabel:"Telegram-Benutzername",leadTgErr:"Bitte gib deinen Telegram-Benutzernamen ein.",
+    leadConsentText:"Ich stimme der Verarbeitung meiner personenbezogenen Daten (E-Mail und Telegram-Benutzername) zu Profiling- und Marketingzwecken gemäß der Datenschutzerklärung zu.",leadConsentErr:"Du musst der Datenverarbeitung zustimmen, um fortzufahren.",
     leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
     navHome:"Home",navServices:"Leistungen",navReviews:"Bewertungen",navFaq:"FAQ",
     heroVideoBadge:"Echte Community",
@@ -1229,11 +1245,14 @@ function setLang(lang){
 }
 /* ─── LEAD CAPTURE MODAL ─── */
 const TELEGRAM_URL = 'https://t.me/PipsATM';
+// Google Apps Script Web App URL that appends leads to a Google Sheet. Set after deploying the script.
+const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxXSlkhKTRbjIRWEsCN96xUyfwcf7vw-z-zmqt9t9F8kLLG4amIJ6kS82YKIkJndBIJig/exec';
 
 function openLeadModal(){
   document.getElementById('leadOverlay').classList.add('open');
   document.getElementById('leadEmailErr').style.display='none';
   document.getElementById('leadTgErr').style.display='none';
+  document.getElementById('leadConsentErr').style.display='none';
 }
 
 function closeLeadModal(){
@@ -1244,18 +1263,28 @@ function submitLead(evt){
   evt.preventDefault();
   const email = document.getElementById('leadEmail').value.trim();
   const tg = document.getElementById('leadTg').value.trim();
+  const consent = document.getElementById('leadConsent').checked;
   const emailErr = document.getElementById('leadEmailErr');
   const tgErr = document.getElementById('leadTgErr');
+  const consentErr = document.getElementById('leadConsentErr');
   const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
   const tgOk = tg.length >= 2;
 
   emailErr.style.display = emailOk ? 'none' : 'block';
   tgErr.style.display = tgOk ? 'none' : 'block';
-  if(!emailOk || !tgOk) return false;
+  consentErr.style.display = consent ? 'none' : 'block';
+  if(!emailOk || !tgOk || !consent) return false;
 
-  // PLACEHOLDER: lead storage not yet wired up.
-  // TODO: replace this block with a real submission (webhook, Google Form, backend endpoint, etc.)
-  console.log('[PipsATM Lead]', {email: email, telegram: tg, capturedAt: new Date().toISOString()});
+  if(SHEET_WEBHOOK_URL){
+    fetch(SHEET_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({email: email, telegram: tg, consent: consent, capturedAt: new Date().toISOString(), lang: window._lang})
+    }).catch(function(err){ console.error('[PipsATM Lead] sheet submission failed', err); });
+  } else {
+    console.log('[PipsATM Lead]', {email: email, telegram: tg, consent: consent, capturedAt: new Date().toISOString()});
+  }
 
   closeLeadModal();
   document.getElementById('leadForm').reset();

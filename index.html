@@ -277,6 +277,21 @@ select.ci option{background:#13161C;color:var(--text)}
 .footer-privacy-link{color:var(--muted);text-decoration:underline;text-decoration-color:transparent;transition:color .2s,text-decoration-color .2s}
 .footer-privacy-link:hover{color:var(--text);text-decoration-color:var(--muted)}
 
+/* ── COOKIE BANNER ── */
+.cookie-banner{position:fixed;left:0;right:0;bottom:0;z-index:999;background:#0D1220;border-top:1px solid var(--border);padding:1.25rem 2rem;display:none;align-items:center;justify-content:center;gap:1.5rem;flex-wrap:wrap;box-shadow:0 -8px 30px rgba(0,0,0,.35)}
+.cookie-banner-text{font-size:.85rem;color:#8A9BBF;line-height:1.55;max-width:640px}
+.cookie-banner-text a{color:var(--teal);text-decoration:underline}
+.cookie-banner-actions{display:flex;gap:.75rem;flex-shrink:0}
+.cookie-btn{padding:.65rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:all .2s;white-space:nowrap;border:1px solid var(--border);background:transparent;color:var(--text);font-family:'Space Grotesk',sans-serif}
+.cookie-btn:hover{border-color:var(--teal);color:var(--teal)}
+.cookie-btn.primary{background:var(--teal);color:#080C14;border-color:var(--teal)}
+.cookie-btn.primary:hover{background:#34E0BB;color:#080C14}
+@media(max-width:640px){
+  .cookie-banner{padding:1.1rem 1.25rem;flex-direction:column;align-items:stretch;text-align:center}
+  .cookie-banner-actions{justify-content:center}
+  .cookie-btn{flex:1}
+}
+
 /* ── LEAD MODAL ── */
 .lead-overlay{position:fixed;inset:0;background:rgba(4,6,10,0.82);backdrop-filter:blur(4px);z-index:1000;display:none;align-items:center;justify-content:center;padding:1.5rem}
 .lead-overlay.open{display:flex;animation:fadeIn .2s ease}
@@ -768,6 +783,10 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     <p data-t="privacyRightsText">Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.</p>
   </div>
   <div class="policy-block">
+    <h3 data-t="privacyCookiesTitle">Cookies</h3>
+    <p data-t="privacyCookiesText">We use essential cookies/local storage required for the site to function (e.g. remembering your language and cookie choice). With your consent, given via the cookie banner, we may also use non-essential cookies to improve your experience. You can change your choice at any time by clearing your browser's site data.</p>
+  </div>
+  <div class="policy-block">
     <h3 data-t="privacyChangesTitle">Changes to this policy</h3>
     <p data-t="privacyChangesText">We may update this policy from time to time. Any changes will be published on this page.</p>
   </div>
@@ -815,6 +834,17 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
      SOCIAL PROOF TOAST
 ═══════════════════════════════════ -->
 <div class="toast-wrap" id="toastWrap"></div>
+
+<!-- ═══════════════════════════════════
+     COOKIE BANNER
+═══════════════════════════════════ -->
+<div class="cookie-banner" id="cookieBanner">
+  <div class="cookie-banner-text" data-t="cookieText">We use essential cookies to make our site work, and, with your consent, non-essential cookies to improve your experience. <a href="#privacy">Learn more</a>.</div>
+  <div class="cookie-banner-actions">
+    <button class="cookie-btn" id="cookieEssentialBtn" data-t="cookieEssential">Essential only</button>
+    <button class="cookie-btn primary" id="cookieAcceptBtn" data-t="cookieAcceptAll">Accept all</button>
+  </div>
+</div>
 
 <footer>
   <div style="display:flex;align-items:center;justify-content:center;gap:8px;margin-bottom:.5rem">
@@ -990,8 +1020,10 @@ const translations={
     privacyStorageTitle:"Where your data is stored",privacyStorageText:"Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.",
     privacyRetentionTitle:"How long we keep your data",privacyRetentionText:"We keep your data for as long as you remain a member of our community or until you request its deletion, whichever comes first.",
     privacyRightsTitle:"Your rights",privacyRightsText:'Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyCookiesTitle:"Cookies",privacyCookiesText:"We use essential cookies/local storage required for the site to function (e.g. remembering your language and cookie choice). With your consent, given via the cookie banner, we may also use non-essential cookies to improve your experience. You can change your choice at any time by clearing your browser's site data.",
     privacyChangesTitle:"Changes to this policy",privacyChangesText:"We may update this policy from time to time. Any changes will be published on this page.",
     privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",
+    cookieText:'We use essential cookies to make our site work, and, with your consent, non-essential cookies to improve your experience. <a href="#privacy">Learn more</a>.',cookieEssential:"Essential only",cookieAcceptAll:"Accept all",
     leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
     navHome:"Home",navServices:"Services",navReviews:"Reviews",navFaq:"FAQ's",
     heroVideoBadge:"Real community",
@@ -1065,8 +1097,10 @@ const translations={
     privacyStorageTitle:"Dove conserviamo i tuoi dati",privacyStorageText:"I dati inviati vengono conservati in un foglio Google Sheets accessibile solo allo staff PipsATM, ospitato sull'infrastruttura Google. Non vendiamo né condividiamo i tuoi dati con terzi per loro finalità di marketing.",
     privacyRetentionTitle:"Per quanto tempo conserviamo i tuoi dati",privacyRetentionText:"Conserviamo i tuoi dati finché resti membro della nostra community o fino a quando non richiedi la cancellazione, a seconda di cosa avviene prima.",
     privacyRightsTitle:"I tuoi diritti",privacyRightsText:'Ai sensi del GDPR, hai diritto di accedere, correggere, cancellare o esportare i tuoi dati, di revocare il consenso in qualsiasi momento e di opporti al trattamento. Puoi anche presentare un reclamo al Garante per la protezione dei dati personali. Per esercitare questi diritti, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyCookiesTitle:"Cookie",privacyCookiesText:"Utilizziamo cookie essenziali/local storage necessari al funzionamento del sito (es. ricordare la lingua e la tua scelta sui cookie). Con il tuo consenso, dato tramite il banner cookie, potremmo utilizzare anche cookie non essenziali per migliorare la tua esperienza. Puoi modificare la tua scelta in qualsiasi momento cancellando i dati del sito dal browser.",
     privacyChangesTitle:"Modifiche a questa informativa",privacyChangesText:"Potremmo aggiornare periodicamente questa informativa. Eventuali modifiche saranno pubblicate in questa pagina.",
     privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",
+    cookieText:'Utilizziamo cookie essenziali per far funzionare il sito e, con il tuo consenso, cookie non essenziali per migliorare la tua esperienza. <a href="#privacy">Scopri di più</a>.',cookieEssential:"Solo essenziali",cookieAcceptAll:"Accetta tutti",
     leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
     navHome:"Home",navServices:"Servizi",navReviews:"Recensioni",navFaq:"FAQ",
     heroVideoBadge:"Community reale",
@@ -1140,8 +1174,10 @@ const translations={
     privacyStorageTitle:"Dónde se almacenan tus datos",privacyStorageText:"Los datos enviados se almacenan en una hoja de cálculo de Google Sheets accesible solo para el equipo de PipsATM, alojada en la infraestructura de Google. No vendemos ni compartimos tus datos con terceros para sus propios fines de marketing.",
     privacyRetentionTitle:"Cuánto tiempo conservamos tus datos",privacyRetentionText:"Conservamos tus datos mientras seas miembro de nuestra comunidad o hasta que solicites su eliminación, lo que ocurra primero.",
     privacyRightsTitle:"Tus derechos",privacyRightsText:'De acuerdo con el RGPD, tienes derecho a acceder, corregir, eliminar o exportar tus datos, a retirar tu consentimiento en cualquier momento y a oponerte al tratamiento. También puedes presentar una reclamación ante tu autoridad de protección de datos. Para ejercer estos derechos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyCookiesTitle:"Cookies",privacyCookiesText:"Utilizamos cookies esenciales/almacenamiento local necesarios para el funcionamiento del sitio (p. ej. recordar tu idioma y tu elección sobre cookies). Con tu consentimiento, otorgado mediante el banner de cookies, también podemos utilizar cookies no esenciales para mejorar tu experiencia. Puedes cambiar tu elección en cualquier momento borrando los datos del sitio en tu navegador.",
     privacyChangesTitle:"Cambios en esta política",privacyChangesText:"Podemos actualizar esta política periódicamente. Cualquier cambio se publicará en esta página.",
     privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",
+    cookieText:'Utilizamos cookies esenciales para que nuestro sitio funcione y, con tu consentimiento, cookies no esenciales para mejorar tu experiencia. <a href="#privacy">Más información</a>.',cookieEssential:"Solo esenciales",cookieAcceptAll:"Aceptar todas",
     leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
     navHome:"Inicio",navServices:"Servicios",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",
     heroVideoBadge:"Comunidad real",
@@ -1215,8 +1251,10 @@ const translations={
     privacyStorageTitle:"Où sont stockées vos données",privacyStorageText:"Les données envoyées sont stockées dans une feuille Google Sheets accessible uniquement à l'équipe PipsATM, hébergée sur l'infrastructure de Google. Nous ne vendons ni ne partageons vos données avec des tiers à des fins de marketing.",
     privacyRetentionTitle:"Combien de temps nous conservons vos données",privacyRetentionText:"Nous conservons vos données tant que vous êtes membre de notre communauté ou jusqu'à ce que vous demandiez leur suppression, selon la première éventualité.",
     privacyRightsTitle:"Vos droits",privacyRightsText:'Conformément au RGPD, vous avez le droit d\'accéder à vos données, de les corriger, de les supprimer ou de les exporter, de retirer votre consentement à tout moment et de vous opposer au traitement. Vous pouvez également déposer une plainte auprès de votre autorité de protection des données. Pour exercer ces droits, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyCookiesTitle:"Cookies",privacyCookiesText:"Nous utilisons des cookies essentiels/du stockage local nécessaires au fonctionnement du site (par ex. mémoriser votre langue et votre choix concernant les cookies). Avec votre consentement, donné via la bannière cookies, nous pouvons également utiliser des cookies non essentiels pour améliorer votre expérience. Vous pouvez modifier votre choix à tout moment en effaçant les données du site dans votre navigateur.",
     privacyChangesTitle:"Modifications de cette politique",privacyChangesText:"Nous pouvons mettre à jour cette politique de temps à autre. Tout changement sera publié sur cette page.",
     privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",
+    cookieText:'Nous utilisons des cookies essentiels pour faire fonctionner notre site et, avec votre consentement, des cookies non essentiels pour améliorer votre expérience. <a href="#privacy">En savoir plus</a>.',cookieEssential:"Essentiels uniquement",cookieAcceptAll:"Tout accepter",
     leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
     navHome:"Accueil",navServices:"Services",navReviews:"Avis",navFaq:"FAQ",
     heroVideoBadge:"Communauté réelle",
@@ -1290,8 +1328,10 @@ const translations={
     privacyStorageTitle:"Wo deine Daten gespeichert werden",privacyStorageText:"Die übermittelten Daten werden in einer Google-Sheets-Tabelle gespeichert, auf die nur das PipsATM-Team Zugriff hat, gehostet auf der Infrastruktur von Google. Wir verkaufen oder teilen deine Daten nicht mit Dritten für deren eigene Marketingzwecke.",
     privacyRetentionTitle:"Wie lange wir deine Daten speichern",privacyRetentionText:"Wir speichern deine Daten, solange du Mitglied unserer Community bist oder bis du ihre Löschung beantragst, je nachdem, was zuerst eintritt.",
     privacyRightsTitle:"Deine Rechte",privacyRightsText:'Gemäß der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung oder Export deiner Daten, auf jederzeitigen Widerruf deiner Einwilligung und auf Widerspruch gegen die Verarbeitung. Du kannst auch eine Beschwerde bei deiner Datenschutzbehörde einreichen. Um diese Rechte auszuüben, kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyCookiesTitle:"Cookies",privacyCookiesText:"Wir verwenden essenzielle Cookies/lokalen Speicher, die für die Funktion der Website erforderlich sind (z. B. um deine Sprache und deine Cookie-Wahl zu speichern). Mit deiner über den Cookie-Banner erteilten Zustimmung können wir auch nicht-essenzielle Cookies verwenden, um dein Erlebnis zu verbessern. Du kannst deine Wahl jederzeit ändern, indem du die Website-Daten in deinem Browser löschst.",
     privacyChangesTitle:"Änderungen dieser Erklärung",privacyChangesText:"Wir können diese Erklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite veröffentlicht.",
     privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",
+    cookieText:'Wir verwenden essenzielle Cookies, damit unsere Website funktioniert, und mit deiner Zustimmung nicht-essenzielle Cookies, um dein Erlebnis zu verbessern. <a href="#privacy">Mehr erfahren</a>.',cookieEssential:"Nur essenzielle",cookieAcceptAll:"Alle akzeptieren",
     leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
     navHome:"Home",navServices:"Leistungen",navReviews:"Bewertungen",navFaq:"FAQ",
     heroVideoBadge:"Echte Community",
@@ -1626,6 +1666,29 @@ function buildProofEvents(lang){
 
   // First toast after a short delay so it doesn't appear instantly on page load
   setTimeout(scheduleLoop, 3000);
+})();
+
+/* ─── COOKIE BANNER ─── */
+(function initCookieBanner(){
+  var COOKIE_CONSENT_KEY = 'pipsatm_cookie_consent';
+  var banner = document.getElementById('cookieBanner');
+  var stored = localStorage.getItem(COOKIE_CONSENT_KEY);
+
+  if(stored){
+    window.cookieConsent = stored;
+    return;
+  }
+
+  banner.style.display = 'flex';
+
+  function setConsent(value){
+    localStorage.setItem(COOKIE_CONSENT_KEY, value);
+    window.cookieConsent = value;
+    banner.style.display = 'none';
+  }
+
+  document.getElementById('cookieAcceptBtn').addEventListener('click', function(){ setConsent('all'); });
+  document.getElementById('cookieEssentialBtn').addEventListener('click', function(){ setConsent('essential'); });
 })();
 </script>
 </body>

@@ -163,6 +163,22 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 .partner-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#080C14;padding:.65rem 1.35rem;border-radius:8px;font-size:.88rem;font-weight:700;letter-spacing:.02em;transition:all .2s;align-self:flex-start}
 .partner-cta:hover{background:#34E0BB;transform:translateY(-1px);box-shadow:0 6px 24px rgba(38,201,168,.2)}
 
+/* STORE */
+.store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
+.store-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s}
+.store-card:hover{border-color:rgba(38,201,168,.3)}
+.store-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
+.store-name{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;line-height:1.3}
+.store-badge{flex-shrink:0;padding:.28rem .75rem;border-radius:99px;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;background:rgba(38,201,168,.1);border:1px solid rgba(38,201,168,.3);color:var(--teal);white-space:nowrap}
+.store-desc{font-size:.875rem;color:#8A9BBF;line-height:1.6;flex:1}
+.store-price-row{display:flex;align-items:baseline;gap:.5rem;flex-wrap:wrap}
+.store-price{font-family:'Space Mono',monospace;font-size:1.5rem;font-weight:700;color:var(--text)}
+.store-price-period{font-size:.8rem;color:var(--muted)}
+.store-price-old{font-size:.9rem;color:var(--muted);text-decoration:line-through}
+.store-save-badge{font-size:.68rem;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:.15rem .5rem;border-radius:99px}
+.store-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#080C14;padding:.65rem 1.35rem;border-radius:8px;font-size:.88rem;font-weight:700;letter-spacing:.02em;transition:all .2s;align-self:flex-start}
+.store-cta:hover{background:#34E0BB;transform:translateY(-1px);box-shadow:0 6px 24px rgba(38,201,168,.2)}
+
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:.75rem}
 .faq-item{background:var(--surface);border:1px solid var(--border);border-radius:12px;overflow:hidden;transition:border-color .2s}
@@ -349,6 +365,7 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
       <div class="nav-links">
         <a href="#top" class="nav-link active" data-t="navHome">Home</a>
         <a href="#services" class="nav-link" data-t="navServices">Services</a>
+        <a href="#store" class="nav-link" data-t="navStore">Store</a>
         <a href="#reviews" class="nav-link" data-t="navReviews">Reviews</a>
         <a href="#faq" class="nav-link" data-t="navFaq">FAQ's</a>
       </div>
@@ -458,6 +475,62 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     <div class="feat-card"><div class="feat-icon">🧪</div><h3 data-t="f4t">Proprietary indicators</h3><p data-t="f4d">Tools developed in-house and not available elsewhere. A concrete competitive advantage in the market.</p></div>
     <div class="feat-card"><div class="feat-icon">🤖</div><h3 data-t="f5t">Full automation</h3><p data-t="f5d">Our EAs run strategies 24/7 on MT5, eliminating emotion from every trading decision.</p></div>
     <div class="feat-card"><div class="feat-icon">🎯</div><h3 data-t="f6t">XAU/USD focus</h3><p data-t="f6d">Total specialisation on gold. We know every micro-structure, every session, every seasonal dynamic.</p></div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ═══════════════════════════════════
+     STORE
+═══════════════════════════════════ -->
+<section class="sec" id="store">
+  <div class="sec-label" data-t="storeLabel">STORE</div>
+  <h2 class="sec-title" data-t="storeTitle">Tools built by PipsATM</h2>
+  <p class="sec-sub" data-t="storeSub">Indicators, EAs and VIP access developed in-house to give you a real edge in the market.</p>
+  <div class="store-grid">
+
+    <!-- VIP Room -->
+    <div class="store-card">
+      <div class="store-card-header">
+        <span class="store-name">VIP Room</span>
+        <span class="store-badge" data-t="storeBadgeSubscription">Subscription</span>
+      </div>
+      <p class="store-desc" data-t="storeVipDesc">Institutional-grade AI-generated signals and copy trading, straight from our VIP Telegram room.</p>
+      <div class="store-price-row">
+        <span class="store-price">$99</span>
+        <span class="store-price-period" data-t="storePerMonth">/ month</span>
+      </div>
+      <a href="https://whop.com/joined/pipsatm/products/vip-room-pipsatm/" target="_blank" rel="noopener" class="store-cta">↗ <span data-t="storeGetAccess">Get access</span></a>
+    </div>
+
+    <!-- Indicator -->
+    <div class="store-card">
+      <div class="store-card-header">
+        <span class="store-name" data-t="storeIndicatorName">Premium &amp; Discount + Order Blocks Indicator</span>
+        <span class="store-badge" data-t="storeBadgeIndicator">Indicator</span>
+      </div>
+      <p class="store-desc" data-t="storeIndicatorDesc">AI-powered Gold 1-minute trading automation with price action detection, order block identification and an integrated breakeven function.</p>
+      <div class="store-price-row">
+        <span class="store-price">$19.99</span>
+        <span class="store-price-old">$26.65</span>
+        <span class="store-save-badge" data-t="storeSave25">Save 25%</span>
+      </div>
+      <a href="https://whop.com/joined/pipsatm/products/pdo/" target="_blank" rel="noopener" class="store-cta">↗ <span data-t="storeBuyNow">Buy now</span></a>
+    </div>
+
+    <!-- Trade Manager EA -->
+    <div class="store-card">
+      <div class="store-card-header">
+        <span class="store-name" data-t="storeEaName">Trade Manager EA</span>
+        <span class="store-badge" data-t="storeBadgeEa">EA</span>
+      </div>
+      <p class="store-desc" data-t="storeEaDesc">Install it, set it up and forget it. Manage your open trades on autopilot, with no need to watch the charts all day.</p>
+      <div class="store-price-row">
+        <span class="store-price">$31.99</span>
+      </div>
+      <a href="https://whop.com/joined/pipsatm/products/trademanager-ea/" target="_blank" rel="noopener" class="store-cta">↗ <span data-t="storeBuyNow">Buy now</span></a>
+    </div>
+
   </div>
 </section>
 
@@ -1027,7 +1100,11 @@ const translations={
     privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",
     cookieText:'We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="#privacy">Privacy Policy</a>.',cookieEssential:"Essential only",cookieAcceptAll:"Accept all",
     leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
-    navHome:"Home",navServices:"Services",navReviews:"Reviews",navFaq:"FAQ's",
+    navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",
+    storeLabel:"STORE",storeTitle:"Tools built by PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
+    storeBadgeSubscription:"Subscription",storeVipDesc:"Institutional-grade AI-generated signals and copy trading, straight from our VIP Telegram room.",storePerMonth:"/ month",storeGetAccess:"Get access",
+    storeIndicatorName:"Premium &amp; Discount + Order Blocks Indicator",storeBadgeIndicator:"Indicator",storeIndicatorDesc:"AI-powered Gold 1-minute trading automation with price action detection, order block identification and an integrated breakeven function.",storeSave25:"Save 25%",storeBuyNow:"Buy now",
+    storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Install it, set it up and forget it. Manage your open trades on autopilot, with no need to watch the charts all day.",
     heroVideoBadge:"Real community",
     faqLabel:"Got questions?",faqTitle:"Frequently Asked Questions",faqSub:"Everything you need to know before joining the community.",
     faqQ1:"Is the community channel really free?",faqA1:"Yes. Access to the PipsATM community on Telegram is completely free — no hidden fees, no credit card required. Just join and start receiving daily analysis.",
@@ -1104,7 +1181,11 @@ const translations={
     privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",
     cookieText:'Utilizziamo cookie essenziali per garantire il corretto funzionamento del sito e, con il tuo consenso, cookie di analisi e marketing per migliorare la tua esperienza, analizzare il traffico del sito e personalizzare i contenuti. Puoi accettare tutti i cookie oppure utilizzare solo quelli essenziali. Per maggiori informazioni, consulta la nostra <a href="#privacy">Informativa Privacy</a>.',cookieEssential:"Solo essenziali",cookieAcceptAll:"Accetta tutti",
     leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
-    navHome:"Home",navServices:"Servizi",navReviews:"Recensioni",navFaq:"FAQ",
+    navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",
+    storeLabel:"STORE",storeTitle:"Strumenti creati da PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
+    storeBadgeSubscription:"Abbonamento",storeVipDesc:"Segnali generati dall'AI di livello istituzionale e copy trading, direttamente dalla nostra VIP room su Telegram.",storePerMonth:"/ mese",storeGetAccess:"Ottieni accesso",
+    storeIndicatorName:"Indicatore Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicatore",storeIndicatorDesc:"Automazione di trading sull'oro a 1 minuto basata su AI, con rilevamento del price action, identificazione degli order block e funzione di breakeven integrata.",storeSave25:"Risparmia 25%",storeBuyNow:"Acquista ora",
+    storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installalo, configuralo e dimenticatene. Gestisci le tue posizioni aperte in automatico, senza dover controllare i grafici tutto il giorno.",
     heroVideoBadge:"Community reale",
     faqLabel:"Hai domande?",faqTitle:"Domande Frequenti",faqSub:"Tutto quello che devi sapere prima di entrare nella community.",
     faqQ1:"Il canale della community è davvero gratuito?",faqA1:"Sì. L'accesso alla community PipsATM su Telegram è completamente gratuito — nessun costo nascosto, nessuna carta di credito richiesta. Basta entrare e iniziare a ricevere l'analisi giornaliera.",
@@ -1181,7 +1262,11 @@ const translations={
     privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",
     cookieText:'Utilizamos cookies esenciales para garantizar el correcto funcionamiento del sitio web y, con tu consentimiento, cookies de análisis y marketing para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. Puedes aceptar todas las cookies o utilizar solo las esenciales. Para más información, consulta nuestra <a href="#privacy">Política de Privacidad</a>.',cookieEssential:"Solo esenciales",cookieAcceptAll:"Aceptar todas",
     leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
-    navHome:"Inicio",navServices:"Servicios",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",
+    navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",
+    storeLabel:"TIENDA",storeTitle:"Herramientas creadas por PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
+    storeBadgeSubscription:"Suscripción",storeVipDesc:"Señales generadas por IA de nivel institucional y copy trading, directamente desde nuestra sala VIP en Telegram.",storePerMonth:"/ mes",storeGetAccess:"Obtener acceso",
+    storeIndicatorName:"Indicador Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicador",storeIndicatorDesc:"Automatización de trading en oro a 1 minuto impulsada por IA, con detección de price action, identificación de order blocks y función de breakeven integrada.",storeSave25:"Ahorra 25%",storeBuyNow:"Comprar ahora",
+    storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Instálalo, configúralo y olvídate. Gestiona tus operaciones abiertas en piloto automático, sin necesidad de mirar los gráficos todo el día.",
     heroVideoBadge:"Comunidad real",
     faqLabel:"¿Tienes preguntas?",faqTitle:"Preguntas Frecuentes",faqSub:"Todo lo que necesitas saber antes de unirte a la comunidad.",
     faqQ1:"¿El canal de la comunidad es realmente gratis?",faqA1:"Sí. El acceso a la comunidad PipsATM en Telegram es completamente gratuito — sin costes ocultos, sin tarjeta de crédito. Solo únete y empieza a recibir el análisis diario.",
@@ -1258,7 +1343,11 @@ const translations={
     privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",
     cookieText:'Nous utilisons des cookies essentiels pour garantir le bon fonctionnement du site et, avec votre consentement, des cookies d\'analyse et de marketing pour améliorer votre expérience, analyser le trafic du site et personnaliser le contenu. Vous pouvez accepter tous les cookies ou utiliser uniquement les cookies essentiels. Pour plus d\'informations, consultez notre <a href="#privacy">Politique de Confidentialité</a>.',cookieEssential:"Essentiels uniquement",cookieAcceptAll:"Tout accepter",
     leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
-    navHome:"Accueil",navServices:"Services",navReviews:"Avis",navFaq:"FAQ",
+    navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",
+    storeLabel:"BOUTIQUE",storeTitle:"Outils créés par PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
+    storeBadgeSubscription:"Abonnement",storeVipDesc:"Signaux générés par IA de niveau institutionnel et copy trading, directement depuis notre salon VIP sur Telegram.",storePerMonth:"/ mois",storeGetAccess:"Obtenir l'accès",
+    storeIndicatorName:"Indicateur Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicateur",storeIndicatorDesc:"Automatisation du trading sur l'or en 1 minute basée sur l'IA, avec détection du price action, identification des order blocks et fonction de breakeven intégrée.",storeSave25:"Économisez 25%",storeBuyNow:"Acheter maintenant",
+    storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installez-le, configurez-le et oubliez-le. Gérez vos positions ouvertes en pilote automatique, sans avoir à surveiller les graphiques toute la journée.",
     heroVideoBadge:"Communauté réelle",
     faqLabel:"Des questions ?",faqTitle:"Questions Fréquentes",faqSub:"Tout ce que vous devez savoir avant de rejoindre la communauté.",
     faqQ1:"Le canal de la communauté est-il vraiment gratuit ?",faqA1:"Oui. L'accès à la communauté PipsATM sur Telegram est entièrement gratuit — aucun frais caché, aucune carte bancaire requise. Rejoignez-nous et recevez l'analyse quotidienne.",
@@ -1335,7 +1424,11 @@ const translations={
     privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",
     cookieText:'Wir verwenden essenzielle Cookies, um die ordnungsgemäße Funktion der Website zu gewährleisten, sowie mit deiner Zustimmung Analyse- und Marketing-Cookies, um dein Erlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Du kannst alle Cookies akzeptieren oder nur essenzielle Cookies verwenden. Weitere Informationen findest du in unserer <a href="#privacy">Datenschutzerklärung</a>.',cookieEssential:"Nur essenzielle",cookieAcceptAll:"Alle akzeptieren",
     leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
-    navHome:"Home",navServices:"Leistungen",navReviews:"Bewertungen",navFaq:"FAQ",
+    navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",
+    storeLabel:"STORE",storeTitle:"Von PipsATM entwickelte Tools",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
+    storeBadgeSubscription:"Abo",storeVipDesc:"KI-generierte Signale auf institutionellem Niveau und Copy Trading, direkt aus unserem VIP-Bereich auf Telegram.",storePerMonth:"/ Monat",storeGetAccess:"Zugang erhalten",
+    storeIndicatorName:"Premium &amp; Discount + Order Blocks Indikator",storeBadgeIndicator:"Indikator",storeIndicatorDesc:"KI-gestützte Gold-Trading-Automatisierung auf dem 1-Minuten-Chart mit Price-Action-Erkennung, Order-Block-Identifikation und integrierter Breakeven-Funktion.",storeSave25:"25% sparen",storeBuyNow:"Jetzt kaufen",
+    storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installieren, einrichten und vergessen. Verwalte deine offenen Trades im Autopilot, ohne den ganzen Tag die Charts beobachten zu müssen.",
     heroVideoBadge:"Echte Community",
     faqLabel:"Fragen?",faqTitle:"Häufig gestellte Fragen",faqSub:"Alles, was du wissen musst, bevor du der Community beitrittst.",
     faqQ1:"Ist der Community-Kanal wirklich kostenlos?",faqA1:"Ja. Der Zugang zur PipsATM-Community auf Telegram ist komplett kostenlos — keine versteckten Kosten, keine Kreditkarte erforderlich. Einfach beitreten und die tägliche Analyse erhalten.",

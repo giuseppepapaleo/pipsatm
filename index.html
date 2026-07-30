@@ -136,6 +136,9 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 .rev-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-glow)}
 .review-write-btn{display:inline-flex;align-items:center;gap:.5rem;background:none;border:1px solid var(--border);color:var(--text);padding:.6rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:all .2s;margin-bottom:2rem;font-family:'Space Grotesk',sans-serif}
 .review-write-btn:hover{border-color:var(--gold);color:var(--gold)}
+.review-controls{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap;margin-bottom:2rem}
+.review-controls .review-write-btn{margin-bottom:0}
+.review-write-btn.active-filter{border-color:var(--teal);color:var(--teal)}
 .star-picker{display:flex;gap:.35rem;font-size:1.7rem;line-height:1;cursor:pointer;margin-bottom:.3rem}
 .star-pick{color:#2A3348;transition:color .12s}
 .star-pick.picked{color:var(--gold)}
@@ -548,7 +551,20 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
   <div class="sec-label" data-t="revLabel">Community</div>
   <h2 class="sec-title" data-t="revTitle">What traders say</h2>
   <p class="sec-sub" style="margin-bottom:1.25rem" data-t="revSub">Real voices from our Telegram community.</p>
-  <button class="review-write-btn" onclick="openReviewModal()">★ <span data-t="reviewWriteBtn">Write a review</span></button>
+  <div class="review-controls">
+    <button class="review-write-btn" onclick="openReviewModal()">★ <span data-t="reviewWriteBtn">Write a review</span></button>
+    <button class="review-write-btn active-filter" id="reviewFilterAllBtn" onclick="filterReviewsByLang('all')" data-t="reviewFilterAll">All reviews</button>
+    <div class="lang-switcher" id="reviewLangFilterSwitcher">
+      <button class="review-write-btn" onclick="toggleReviewLangFilter()">🌐 <span id="reviewFilterLangLabel" data-t="reviewFilterByLang">Filter by language</span> ▾</button>
+      <div class="lang-dropdown" id="reviewLangFilterDropdown">
+        <div class="lang-option" onclick="filterReviewsByLang('en')">🇬🇧 English</div>
+        <div class="lang-option" onclick="filterReviewsByLang('it')">🇮🇹 Italiano</div>
+        <div class="lang-option" onclick="filterReviewsByLang('es')">🇪🇸 Español</div>
+        <div class="lang-option" onclick="filterReviewsByLang('fr')">🇫🇷 Français</div>
+        <div class="lang-option" onclick="filterReviewsByLang('de')">🇩🇪 Deutsch</div>
+      </div>
+    </div>
+  </div>
   <div class="reviews-outer">
     <div class="reviews-row" id="reviewsRow">
       <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-t="r1">"The community channel's daily analysis is incredibly clear. I just copy and paste the trade idea straight into my platform — no guesswork."</p><div class="review-author">— James R., London</div></div>
@@ -817,6 +833,16 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
           <textarea class="lead-input" style="height:auto;padding:10px 13px;resize:vertical" rows="4" id="reviewText" maxlength="300" placeholder="Share your experience with PipsATM..."></textarea>
           <div class="lead-error" id="reviewTextErr" data-t="reviewTextErr">Please write a bit more (at least 10 characters).</div>
         </div>
+        <div class="lead-field">
+          <label class="lead-label" data-t="reviewLangLabel">Review language</label>
+          <select class="lead-input" id="reviewLang">
+            <option value="en">🇬🇧 English</option>
+            <option value="it">🇮🇹 Italiano</option>
+            <option value="es">🇪🇸 Español</option>
+            <option value="fr">🇫🇷 Français</option>
+            <option value="de">🇩🇪 Deutsch</option>
+          </select>
+        </div>
         <button type="button" class="lead-submit" onclick="goToReviewStep2()"><span data-t="reviewNextBtn">Continue</span> →</button>
       </div>
 
@@ -1046,7 +1072,7 @@ const translations={
     reviewNameLabel:"Your name",reviewNameErr:"Please enter your name.",reviewLocationLabel:"Location (optional)",
     reviewStarsLabel:"Your rating",reviewStarsErr:"Please select a rating.",
     reviewTextLabel:"Your review",reviewTextErr:"Please write a bit more (at least 10 characters).",
-    reviewConsentText:'I agree that this review may be published publicly on the site, and I consent to the processing of my email and Telegram username for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",reviewNextBtn:"Continue",
+    reviewConsentText:'I agree that this review may be published publicly on the site, and I consent to the processing of my email and Telegram username for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",reviewNextBtn:"Continue",reviewLangLabel:"Review language",reviewFilterAll:"All reviews",reviewFilterByLang:"Filter by language",
     reviewSubmitBtn:"Publish my review",
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Tools built by PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
@@ -1134,7 +1160,7 @@ const translations={
     reviewNameLabel:"Il tuo nome",reviewNameErr:"Inserisci il tuo nome.",reviewLocationLabel:"Località (opzionale)",
     reviewStarsLabel:"La tua valutazione",reviewStarsErr:"Seleziona una valutazione.",
     reviewTextLabel:"La tua recensione",reviewTextErr:"Scrivi qualche parola in più (almeno 10 caratteri).",
-    reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito e al trattamento della mia email e username Telegram per finalità di profilazione e marketing, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",reviewNextBtn:"Continua",
+    reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito e al trattamento della mia email e username Telegram per finalità di profilazione e marketing, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",reviewNextBtn:"Continua",reviewLangLabel:"Lingua della recensione",reviewFilterAll:"Tutte le recensioni",reviewFilterByLang:"Filtra per lingua",
     reviewSubmitBtn:"Pubblica la mia recensione",
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Strumenti creati da PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
@@ -1222,7 +1248,7 @@ const translations={
     reviewNameLabel:"Tu nombre",reviewNameErr:"Introduce tu nombre.",reviewLocationLabel:"Ubicación (opcional)",
     reviewStarsLabel:"Tu valoración",reviewStarsErr:"Selecciona una valoración.",
     reviewTextLabel:"Tu reseña",reviewTextErr:"Escribe un poco más (al menos 10 caracteres).",
-    reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, y para el tratamiento de mi email y usuario de Telegram con fines de perfilado y marketing, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",reviewNextBtn:"Continuar",
+    reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, y para el tratamiento de mi email y usuario de Telegram con fines de perfilado y marketing, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",reviewNextBtn:"Continuar",reviewLangLabel:"Idioma de la reseña",reviewFilterAll:"Todas las reseñas",reviewFilterByLang:"Filtrar por idioma",
     reviewSubmitBtn:"Publicar mi reseña",
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Herramientas creadas por PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
@@ -1310,7 +1336,7 @@ const translations={
     reviewNameLabel:"Votre nom",reviewNameErr:"Veuillez saisir votre nom.",reviewLocationLabel:"Ville (facultatif)",
     reviewStarsLabel:"Votre note",reviewStarsErr:"Veuillez sélectionner une note.",
     reviewTextLabel:"Votre avis",reviewTextErr:"Veuillez écrire un peu plus (au moins 10 caractères).",
-    reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, et je consens au traitement de mon email et de mon nom d\'utilisateur Telegram à des fins de profilage et de marketing, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",reviewNextBtn:"Continuer",
+    reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, et je consens au traitement de mon email et de mon nom d\'utilisateur Telegram à des fins de profilage et de marketing, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",reviewNextBtn:"Continuer",reviewLangLabel:"Langue de l'avis",reviewFilterAll:"Tous les avis",reviewFilterByLang:"Filtrer par langue",
     reviewSubmitBtn:"Publier mon avis",
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Outils créés par PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
@@ -1398,7 +1424,7 @@ const translations={
     reviewNameLabel:"Dein Name",reviewNameErr:"Bitte gib deinen Namen ein.",reviewLocationLabel:"Ort (optional)",
     reviewStarsLabel:"Deine Bewertung",reviewStarsErr:"Bitte wähle eine Bewertung aus.",
     reviewTextLabel:"Deine Bewertung",reviewTextErr:"Bitte schreibe etwas mehr (mindestens 10 Zeichen).",
-    reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, und willige in die Verarbeitung meiner E-Mail-Adresse und meines Telegram-Benutzernamens zu Profiling- und Marketingzwecken ein, gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",reviewNextBtn:"Weiter",
+    reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, und willige in die Verarbeitung meiner E-Mail-Adresse und meines Telegram-Benutzernamens zu Profiling- und Marketingzwecken ein, gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",reviewNextBtn:"Weiter",reviewLangLabel:"Sprache der Bewertung",reviewFilterAll:"Alle Bewertungen",reviewFilterByLang:"Nach Sprache filtern",
     reviewSubmitBtn:"Bewertung veröffentlichen",
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Von PipsATM entwickelte Tools",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
@@ -1425,6 +1451,11 @@ function toggleLang(){
 document.addEventListener('click',function(e){
   if(!document.getElementById('langSwitcher').contains(e.target))
     document.getElementById('langDropdown').classList.remove('open');
+});
+document.addEventListener('click',function(e){
+  const sw = document.getElementById('reviewLangFilterSwitcher');
+  if(sw && !sw.contains(e.target))
+    document.getElementById('reviewLangFilterDropdown').classList.remove('open');
 });
 
 function setLang(lang){
@@ -1629,14 +1660,49 @@ function initReviewsCarousel(){
 
   window._reviewsWrap = wrap;
   window._reviewsSyncAccumulator = () => { window._reviewsScrollAccumulator = row.scrollLeft; };
+}
 
-  // Inserts a freshly-published review as an original card (before the clone
-  // set) and rebuilds the loop so it's included in the seamless scroll too.
-  window._reviewsAddCard = function(cardEl){
-    const originalCount = row.children.length / 2;
-    row.insertBefore(cardEl, row.children[originalCount] || null);
-    rebuildReviewsLoop();
-  };
+// All reviews fetched from the sheet (plus any published this session), independent
+// of the currently active language filter — re-rendered whenever the filter changes.
+window._fetchedReviews = [];
+window._currentReviewFilter = 'all';
+
+function renderDynamicReviews(){
+  const row = document.getElementById('reviewsRow');
+  if(!row) return;
+  // .review-dynamic clones carry the same class (cloneNode keeps classList),
+  // so this removes both the originals and their loop clones in one sweep.
+  row.querySelectorAll('.review-dynamic').forEach(el => el.remove());
+
+  const filter = window._currentReviewFilter;
+  window._fetchedReviews.forEach(r => {
+    if(filter === 'all' || r.lang === filter){
+      const card = buildReviewCardEl(r);
+      card.classList.add('review-dynamic');
+      row.appendChild(card);
+    }
+  });
+  rebuildReviewsLoop();
+}
+
+function toggleReviewLangFilter(){
+  document.getElementById('reviewLangFilterDropdown').classList.toggle('open');
+}
+
+function filterReviewsByLang(lang){
+  window._currentReviewFilter = lang;
+  document.getElementById('reviewLangFilterDropdown').classList.remove('open');
+  document.getElementById('reviewFilterAllBtn').classList.toggle('active-filter', lang === 'all');
+  const labelEl = document.getElementById('reviewFilterLangLabel');
+  if(lang === 'all'){
+    labelEl.setAttribute('data-t','reviewFilterByLang');
+    const t = translations[window._lang || 'en'];
+    labelEl.textContent = t.reviewFilterByLang;
+  }else{
+    labelEl.removeAttribute('data-t');
+    labelEl.textContent = lang.toUpperCase();
+  }
+  renderDynamicReviews();
 }
 
 async function loadReviews(){
@@ -1646,12 +1712,13 @@ async function loadReviews(){
       const res = await fetch(SHEET_WEBHOOK_URL, {method:'GET'});
       const data = await res.json();
       if(Array.isArray(data)){
-        data.forEach(r => { if(r && r.text) row.appendChild(buildReviewCardEl(r)); });
+        window._fetchedReviews = data.filter(r => r && r.text);
       }
     }catch(err){
       console.error('[PipsATM] failed to load reviews', err);
     }
   }
+  renderDynamicReviews();
   initReviewsCarousel();
 }
 loadReviews();
@@ -1683,6 +1750,7 @@ function openReviewModal(){
   document.getElementById('reviewOverlay').classList.add('open');
   document.getElementById('reviewStep1').style.display = 'block';
   document.getElementById('reviewStep2').style.display = 'none';
+  document.getElementById('reviewLang').value = window._lang || 'en';
   document.getElementById('reviewNameErr').style.display = 'none';
   document.getElementById('reviewStarsErr').style.display = 'none';
   document.getElementById('reviewTextErr').style.display = 'none';
@@ -1735,10 +1803,11 @@ function submitReview(evt){
   document.getElementById('reviewConsentErr').style.display = consent ? 'none' : 'block';
   if(!emailOk || !telegramOk || !consent) return false;
 
+  const reviewLang = document.getElementById('reviewLang').value;
   const reviewData = {
     type: 'review', name: name, location: location, stars: reviewStarsValue, text: text,
     email: email, telegram: telegram, consent: consent,
-    capturedAt: new Date().toISOString(), lang: window._lang
+    capturedAt: new Date().toISOString(), lang: reviewLang
   };
 
   fetch(SHEET_WEBHOOK_URL, {
@@ -1746,7 +1815,10 @@ function submitReview(evt){
     headers: {'Content-Type': 'text/plain;charset=utf-8'},
     body: JSON.stringify(reviewData)
   }).then(() => {
-    if(window._reviewsAddCard) window._reviewsAddCard(buildReviewCardEl(reviewData));
+    window._fetchedReviews.push(reviewData);
+    if(window._currentReviewFilter === 'all' || window._currentReviewFilter === reviewLang){
+      renderDynamicReviews();
+    }
   }).catch(err => console.error('[PipsATM] review submission failed', err));
 
   closeReviewModal();

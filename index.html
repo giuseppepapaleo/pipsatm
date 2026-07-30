@@ -134,6 +134,12 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 .reviews-nav{display:flex;gap:.5rem;margin-top:1.25rem}
 .rev-btn{width:36px;height:36px;border-radius:50%;border:1px solid var(--border);background:var(--surface);color:var(--muted);cursor:pointer;display:flex;align-items:center;justify-content:center;font-size:1rem;transition:border-color .2s,color .2s,background .2s}
 .rev-btn:hover{border-color:var(--teal);color:var(--teal);background:var(--teal-glow)}
+.review-write-btn{display:inline-flex;align-items:center;gap:.5rem;background:none;border:1px solid var(--border);color:var(--text);padding:.6rem 1.25rem;border-radius:8px;font-size:.85rem;font-weight:700;letter-spacing:.02em;cursor:pointer;transition:all .2s;margin-bottom:2rem;font-family:'Space Grotesk',sans-serif}
+.review-write-btn:hover{border-color:var(--gold);color:var(--gold)}
+.star-picker{display:flex;gap:.35rem;font-size:1.7rem;line-height:1;cursor:pointer;margin-bottom:.3rem}
+.star-pick{color:#2A3348;transition:color .12s}
+.star-pick.picked{color:var(--gold)}
+.honeypot{position:absolute;left:-9999px;width:1px;height:1px;opacity:0;pointer-events:none}
 
 /* PARTNERS */
 .partners-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:1.5rem;margin-top:0}
@@ -541,7 +547,8 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
 <section class="sec" id="reviews">
   <div class="sec-label" data-t="revLabel">Community</div>
   <h2 class="sec-title" data-t="revTitle">What traders say</h2>
-  <p class="sec-sub" style="margin-bottom:2rem" data-t="revSub">Real voices from our Telegram community.</p>
+  <p class="sec-sub" style="margin-bottom:1.25rem" data-t="revSub">Real voices from our Telegram community.</p>
+  <button class="review-write-btn" onclick="openReviewModal()">★ <span data-t="reviewWriteBtn">Write a review</span></button>
   <div class="reviews-outer">
     <div class="reviews-row" id="reviewsRow">
       <div class="review-card"><div class="review-stars">★★★★★</div><p class="review-text" data-t="r1">"The community channel's daily analysis is incredibly clear. I just copy and paste the trade idea straight into my platform — no guesswork."</p><div class="review-author">— James R., London</div></div>
@@ -711,6 +718,10 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     <p data-t="privacyBasisText">We process this data to grant you access to our Telegram community and to send you updates, offers and marketing communications related to our services (profiling), based on the explicit consent you give by checking the consent box before submitting the form (Art. 6(1)(a) GDPR).</p>
   </div>
   <div class="policy-block">
+    <h3 data-t="privacyReviewsTitle">Reviews you submit</h3>
+    <p data-t="privacyReviewsText">If you submit a review through the "Write a review" form, the name, location, rating and text you provide are published immediately and publicly in the Reviews section of this site, based on the consent you give before submitting. Do not include information you don't want to be public. You can request removal of a review at any time by contacting us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.</p>
+  </div>
+  <div class="policy-block">
     <h3 data-t="privacyStorageTitle">Where your data is stored</h3>
     <p data-t="privacyStorageText">Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.</p>
   </div>
@@ -767,6 +778,55 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     </form>
     <div class="lead-note" data-t="leadNote">We respect your privacy. No spam, ever.</div>
     <span class="lead-back" onclick="closeLeadModal()" data-t="leadBack">← Back</span>
+  </div>
+</div>
+
+<!-- ═══════════════════════════════════
+     WRITE A REVIEW MODAL
+═══════════════════════════════════ -->
+<div class="lead-overlay" id="reviewOverlay" onclick="if(event.target===this)closeReviewModal()">
+  <div class="lead-modal">
+    <div class="lead-icon">★</div>
+    <h3 data-t="reviewModalTitle">Share your experience</h3>
+    <p class="lead-sub" data-t="reviewModalSub">Tell other traders what you think of PipsATM. Your review is published immediately.</p>
+
+    <form id="reviewForm" onsubmit="return submitReview(event)" novalidate>
+      <div class="lead-field">
+        <label class="lead-label" data-t="reviewNameLabel">Your name</label>
+        <input class="lead-input" type="text" id="reviewName" placeholder="e.g. John D." maxlength="60" required>
+        <div class="lead-error" id="reviewNameErr" data-t="reviewNameErr">Please enter your name.</div>
+      </div>
+      <div class="lead-field">
+        <label class="lead-label" data-t="reviewLocationLabel">Location (optional)</label>
+        <input class="lead-input" type="text" id="reviewLocation" placeholder="e.g. Milan, Italy" maxlength="60">
+      </div>
+      <div class="lead-field">
+        <label class="lead-label" data-t="reviewStarsLabel">Your rating</label>
+        <div class="star-picker" id="starPicker" onmouseleave="paintStars(reviewStarsValue)">
+          <span class="star-pick" onmouseenter="paintStars(1)" onclick="setReviewStars(1)">★</span>
+          <span class="star-pick" onmouseenter="paintStars(2)" onclick="setReviewStars(2)">★</span>
+          <span class="star-pick" onmouseenter="paintStars(3)" onclick="setReviewStars(3)">★</span>
+          <span class="star-pick" onmouseenter="paintStars(4)" onclick="setReviewStars(4)">★</span>
+          <span class="star-pick" onmouseenter="paintStars(5)" onclick="setReviewStars(5)">★</span>
+        </div>
+        <div class="lead-error" id="reviewStarsErr" data-t="reviewStarsErr">Please select a rating.</div>
+      </div>
+      <div class="lead-field">
+        <label class="lead-label" data-t="reviewTextLabel">Your review</label>
+        <textarea class="lead-input" style="height:auto;padding:10px 13px;resize:vertical" rows="4" id="reviewText" maxlength="300" placeholder="Share your experience with PipsATM..." required></textarea>
+        <div class="lead-error" id="reviewTextErr" data-t="reviewTextErr">Please write a bit more (at least 10 characters).</div>
+      </div>
+      <div class="lead-field">
+        <label class="lead-consent">
+          <input type="checkbox" id="reviewConsent">
+          <span class="lead-consent-text" data-t="reviewConsentText">I agree that this review may be published publicly on the site, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.</span>
+        </label>
+        <div class="lead-error" id="reviewConsentErr" data-t="reviewConsentErr">You must accept for your review to be published.</div>
+      </div>
+      <input type="text" id="reviewHoney" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+      <button type="submit" class="lead-submit">★ <span data-t="reviewSubmitBtn">Publish my review</span></button>
+    </form>
+    <span class="lead-back" onclick="closeReviewModal()" data-t="leadBack">← Back</span>
   </div>
 </div>
 
@@ -957,6 +1017,7 @@ const translations={
     privacyControllerTitle:"Data controller",privacyControllerText:'The data controller is TradingPartners S.R.L.S. For any question about this policy or your data, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Data we collect",privacyDataText:"When you opt in to join our Telegram community, we collect the email address and Telegram username you provide in the sign-up form.",
     privacyBasisTitle:"Purpose and legal basis",privacyBasisText:"We process this data to grant you access to our Telegram community and to send you updates, offers and marketing communications related to our services (profiling), based on the explicit consent you give by checking the consent box before submitting the form (Art. 6(1)(a) GDPR).",
+    privacyReviewsTitle:"Reviews you submit",privacyReviewsText:'If you submit a review through the "Write a review" form, the name, location, rating and text you provide are published immediately and publicly in the Reviews section of this site, based on the consent you give before submitting. Do not include information you don\'t want to be public. You can request removal of a review at any time by contacting us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Where your data is stored",privacyStorageText:"Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.",
     privacyRetentionTitle:"How long we keep your data",privacyRetentionText:"We keep your data for as long as you remain a member of our community or until you request its deletion, whichever comes first.",
     privacyRightsTitle:"Your rights",privacyRightsText:'Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -965,6 +1026,12 @@ const translations={
     privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",footerToolsLink:"Pip Calculator",
     cookieText:'We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="#privacy">Privacy Policy</a>.',cookieEssential:"Essential only",cookieAcceptAll:"Accept all",
     leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
+    reviewWriteBtn:"Write a review",reviewModalTitle:"Share your experience",reviewModalSub:"Tell other traders what you think of PipsATM. Your review is published immediately.",
+    reviewNameLabel:"Your name",reviewNameErr:"Please enter your name.",reviewLocationLabel:"Location (optional)",
+    reviewStarsLabel:"Your rating",reviewStarsErr:"Please select a rating.",
+    reviewTextLabel:"Your review",reviewTextErr:"Please write a bit more (at least 10 characters).",
+    reviewConsentText:'I agree that this review may be published publicly on the site, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",
+    reviewSubmitBtn:"Publish my review",
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Tools built by PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
     storeBadgeSubscription:"Subscription",storeVipDesc:"Join our VIP Room to study the markets and trade in real time alongside our professional trade analysis. Improve your market understanding, learn advanced price action concepts, and watch every setup unfold live instead of simply following trading signals.",storePerMonth:"/ month",storeGetAccess:"Get access",
@@ -1038,6 +1105,7 @@ const translations={
     privacyControllerTitle:"Titolare del trattamento",privacyControllerText:'Il titolare del trattamento è TradingPartners S.R.L.S. Per qualsiasi domanda su questa informativa o sui tuoi dati, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Dati raccolti",privacyDataText:"Quando aderisci alla nostra community su Telegram, raccogliamo l'indirizzo email e lo username Telegram che inserisci nel modulo di iscrizione.",
     privacyBasisTitle:"Finalità e base giuridica",privacyBasisText:"Trattiamo questi dati per darti accesso alla nostra community Telegram e per inviarti aggiornamenti, offerte e comunicazioni di marketing relative ai nostri servizi (profilazione), sulla base del consenso esplicito che presti spuntando la casella prima di inviare il modulo (art. 6.1.a GDPR).",
+    privacyReviewsTitle:"Recensioni che invii",privacyReviewsText:'Se invii una recensione tramite il modulo "Scrivi una recensione", il nome, la località, la valutazione e il testo che fornisci vengono pubblicati immediatamente e pubblicamente nella sezione Recensioni di questo sito, sulla base del consenso che presti prima dell\'invio. Non includere informazioni che non vuoi rendere pubbliche. Puoi richiedere la rimozione di una recensione in qualsiasi momento scrivendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Dove conserviamo i tuoi dati",privacyStorageText:"I dati inviati vengono conservati in un foglio Google Sheets accessibile solo allo staff PipsATM, ospitato sull'infrastruttura Google. Non vendiamo né condividiamo i tuoi dati con terzi per loro finalità di marketing.",
     privacyRetentionTitle:"Per quanto tempo conserviamo i tuoi dati",privacyRetentionText:"Conserviamo i tuoi dati finché resti membro della nostra community o fino a quando non richiedi la cancellazione, a seconda di cosa avviene prima.",
     privacyRightsTitle:"I tuoi diritti",privacyRightsText:'Ai sensi del GDPR, hai diritto di accedere, correggere, cancellare o esportare i tuoi dati, di revocare il consenso in qualsiasi momento e di opporti al trattamento. Puoi anche presentare un reclamo al Garante per la protezione dei dati personali. Per esercitare questi diritti, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1046,6 +1114,12 @@ const translations={
     privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",footerToolsLink:"Calcolatore Pip",
     cookieText:'Utilizziamo cookie essenziali per garantire il corretto funzionamento del sito e, con il tuo consenso, cookie di analisi e marketing per migliorare la tua esperienza, analizzare il traffico del sito e personalizzare i contenuti. Puoi accettare tutti i cookie oppure utilizzare solo quelli essenziali. Per maggiori informazioni, consulta la nostra <a href="#privacy">Informativa Privacy</a>.',cookieEssential:"Solo essenziali",cookieAcceptAll:"Accetta tutti",
     leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
+    reviewWriteBtn:"Scrivi una recensione",reviewModalTitle:"Racconta la tua esperienza",reviewModalSub:"Racconta agli altri trader cosa pensi di PipsATM. La tua recensione viene pubblicata subito.",
+    reviewNameLabel:"Il tuo nome",reviewNameErr:"Inserisci il tuo nome.",reviewLocationLabel:"Località (opzionale)",
+    reviewStarsLabel:"La tua valutazione",reviewStarsErr:"Seleziona una valutazione.",
+    reviewTextLabel:"La tua recensione",reviewTextErr:"Scrivi qualche parola in più (almeno 10 caratteri).",
+    reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",
+    reviewSubmitBtn:"Pubblica la mia recensione",
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Strumenti creati da PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
     storeBadgeSubscription:"Abbonamento",storeVipDesc:"Unisciti alla nostra VIP Room per studiare i mercati e fare trading in tempo reale insieme alle nostre analisi professionali. Migliora la tua comprensione del mercato, impara concetti avanzati di price action e guarda ogni setup svilupparsi dal vivo, invece di limitarti a seguire dei segnali di trading.",storePerMonth:"/ mese",storeGetAccess:"Ottieni accesso",
@@ -1119,6 +1193,7 @@ const translations={
     privacyControllerTitle:"Responsable del tratamiento",privacyControllerText:'El responsable del tratamiento es TradingPartners S.R.L.S. Para cualquier consulta sobre esta política o tus datos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Datos que recopilamos",privacyDataText:"Cuando te unes a nuestra comunidad de Telegram, recopilamos el correo electrónico y el nombre de usuario de Telegram que proporcionas en el formulario de registro.",
     privacyBasisTitle:"Finalidad y base jurídica",privacyBasisText:"Tratamos estos datos para darte acceso a nuestra comunidad de Telegram y para enviarte actualizaciones, ofertas y comunicaciones de marketing relacionadas con nuestros servicios (perfilado), en base al consentimiento explícito que otorgas al marcar la casilla antes de enviar el formulario (art. 6.1.a RGPD).",
+    privacyReviewsTitle:"Reseñas que envías",privacyReviewsText:'Si envías una reseña a través del formulario "Escribe una reseña", el nombre, la ubicación, la valoración y el texto que proporcionas se publican de inmediato y públicamente en la sección de Reseñas de este sitio, en base al consentimiento que otorgas antes de enviarla. No incluyas información que no quieras que sea pública. Puedes solicitar la eliminación de una reseña en cualquier momento escribiendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Dónde se almacenan tus datos",privacyStorageText:"Los datos enviados se almacenan en una hoja de cálculo de Google Sheets accesible solo para el equipo de PipsATM, alojada en la infraestructura de Google. No vendemos ni compartimos tus datos con terceros para sus propios fines de marketing.",
     privacyRetentionTitle:"Cuánto tiempo conservamos tus datos",privacyRetentionText:"Conservamos tus datos mientras seas miembro de nuestra comunidad o hasta que solicites su eliminación, lo que ocurra primero.",
     privacyRightsTitle:"Tus derechos",privacyRightsText:'De acuerdo con el RGPD, tienes derecho a acceder, corregir, eliminar o exportar tus datos, a retirar tu consentimiento en cualquier momento y a oponerte al tratamiento. También puedes presentar una reclamación ante tu autoridad de protección de datos. Para ejercer estos derechos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1127,6 +1202,12 @@ const translations={
     privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",footerToolsLink:"Calculadora de Pips",
     cookieText:'Utilizamos cookies esenciales para garantizar el correcto funcionamiento del sitio web y, con tu consentimiento, cookies de análisis y marketing para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. Puedes aceptar todas las cookies o utilizar solo las esenciales. Para más información, consulta nuestra <a href="#privacy">Política de Privacidad</a>.',cookieEssential:"Solo esenciales",cookieAcceptAll:"Aceptar todas",
     leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
+    reviewWriteBtn:"Escribe una reseña",reviewModalTitle:"Comparte tu experiencia",reviewModalSub:"Cuéntales a otros traders qué opinas de PipsATM. Tu reseña se publica de inmediato.",
+    reviewNameLabel:"Tu nombre",reviewNameErr:"Introduce tu nombre.",reviewLocationLabel:"Ubicación (opcional)",
+    reviewStarsLabel:"Tu valoración",reviewStarsErr:"Selecciona una valoración.",
+    reviewTextLabel:"Tu reseña",reviewTextErr:"Escribe un poco más (al menos 10 caracteres).",
+    reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",
+    reviewSubmitBtn:"Publicar mi reseña",
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Herramientas creadas por PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
     storeBadgeSubscription:"Suscripción",storeVipDesc:"Únete a nuestra VIP Room para estudiar los mercados y operar en tiempo real junto a nuestro análisis profesional de trading. Mejora tu comprensión del mercado, aprende conceptos avanzados de price action y observa cómo se desarrolla cada setup en vivo, en lugar de limitarte a seguir señales de trading.",storePerMonth:"/ mes",storeGetAccess:"Obtener acceso",
@@ -1200,6 +1281,7 @@ const translations={
     privacyControllerTitle:"Responsable du traitement",privacyControllerText:'Le responsable du traitement est TradingPartners S.R.L.S. Pour toute question concernant cette politique ou vos données, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Données que nous collectons",privacyDataText:"Lorsque vous rejoignez notre communauté Telegram, nous collectons l'adresse email et le nom d'utilisateur Telegram que vous fournissez dans le formulaire d'inscription.",
     privacyBasisTitle:"Finalité et base juridique",privacyBasisText:"Nous traitons ces données pour vous donner accès à notre communauté Telegram et pour vous envoyer des mises à jour, offres et communications marketing liées à nos services (profilage), sur la base du consentement explicite que vous donnez en cochant la case avant d'envoyer le formulaire (art. 6.1.a RGPD).",
+    privacyReviewsTitle:"Avis que vous publiez",privacyReviewsText:'Si vous soumettez un avis via le formulaire « Laisser un avis », le nom, la ville, la note et le texte que vous fournissez sont publiés immédiatement et publiquement dans la section Avis de ce site, sur la base du consentement que vous donnez avant l\'envoi. N\'incluez pas d\'informations que vous ne souhaitez pas rendre publiques. Vous pouvez demander la suppression d\'un avis à tout moment en écrivant à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Où sont stockées vos données",privacyStorageText:"Les données envoyées sont stockées dans une feuille Google Sheets accessible uniquement à l'équipe PipsATM, hébergée sur l'infrastructure de Google. Nous ne vendons ni ne partageons vos données avec des tiers à des fins de marketing.",
     privacyRetentionTitle:"Combien de temps nous conservons vos données",privacyRetentionText:"Nous conservons vos données tant que vous êtes membre de notre communauté ou jusqu'à ce que vous demandiez leur suppression, selon la première éventualité.",
     privacyRightsTitle:"Vos droits",privacyRightsText:'Conformément au RGPD, vous avez le droit d\'accéder à vos données, de les corriger, de les supprimer ou de les exporter, de retirer votre consentement à tout moment et de vous opposer au traitement. Vous pouvez également déposer une plainte auprès de votre autorité de protection des données. Pour exercer ces droits, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1208,6 +1290,12 @@ const translations={
     privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",footerToolsLink:"Calculateur de Pips",
     cookieText:'Nous utilisons des cookies essentiels pour garantir le bon fonctionnement du site et, avec votre consentement, des cookies d\'analyse et de marketing pour améliorer votre expérience, analyser le trafic du site et personnaliser le contenu. Vous pouvez accepter tous les cookies ou utiliser uniquement les cookies essentiels. Pour plus d\'informations, consultez notre <a href="#privacy">Politique de Confidentialité</a>.',cookieEssential:"Essentiels uniquement",cookieAcceptAll:"Tout accepter",
     leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
+    reviewWriteBtn:"Laisser un avis",reviewModalTitle:"Partagez votre expérience",reviewModalSub:"Dites aux autres traders ce que vous pensez de PipsATM. Votre avis est publié immédiatement.",
+    reviewNameLabel:"Votre nom",reviewNameErr:"Veuillez saisir votre nom.",reviewLocationLabel:"Ville (facultatif)",
+    reviewStarsLabel:"Votre note",reviewStarsErr:"Veuillez sélectionner une note.",
+    reviewTextLabel:"Votre avis",reviewTextErr:"Veuillez écrire un peu plus (au moins 10 caractères).",
+    reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",
+    reviewSubmitBtn:"Publier mon avis",
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Outils créés par PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
     storeBadgeSubscription:"Abonnement",storeVipDesc:"Rejoignez notre VIP Room pour étudier les marchés et trader en temps réel aux côtés de notre analyse professionnelle. Améliorez votre compréhension du marché, apprenez des concepts avancés de price action et regardez chaque setup se dérouler en direct, plutôt que de simplement suivre des signaux de trading.",storePerMonth:"/ mois",storeGetAccess:"Obtenir l'accès",
@@ -1281,6 +1369,7 @@ const translations={
     privacyControllerTitle:"Verantwortlicher",privacyControllerText:'Verantwortlicher für die Datenverarbeitung ist TradingPartners S.R.L.S. Bei Fragen zu dieser Erklärung oder deinen Daten kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Erhobene Daten",privacyDataText:"Wenn du unserer Telegram-Community beitrittst, erheben wir die E-Mail-Adresse und den Telegram-Benutzernamen, die du im Anmeldeformular angibst.",
     privacyBasisTitle:"Zweck und Rechtsgrundlage",privacyBasisText:"Wir verarbeiten diese Daten, um dir Zugang zu unserer Telegram-Community zu gewähren und dir Updates, Angebote und Marketingmitteilungen zu unseren Dienstleistungen zu senden (Profiling), basierend auf der ausdrücklichen Einwilligung, die du durch Ankreuzen des Kästchens vor dem Absenden des Formulars gibst (Art. 6 Abs. 1 lit. a DSGVO).",
+    privacyReviewsTitle:"Von dir eingereichte Bewertungen",privacyReviewsText:'Wenn du über das Formular „Bewertung schreiben" eine Bewertung einreichst, werden der Name, der Ort, die Bewertung und der Text, die du angibst, sofort und öffentlich im Bewertungsbereich dieser Website veröffentlicht, basierend auf der Einwilligung, die du vor dem Absenden gibst. Gib keine Informationen an, die du nicht öffentlich machen möchtest. Du kannst die Entfernung einer Bewertung jederzeit beantragen, indem du uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a> kontaktierst.',
     privacyStorageTitle:"Wo deine Daten gespeichert werden",privacyStorageText:"Die übermittelten Daten werden in einer Google-Sheets-Tabelle gespeichert, auf die nur das PipsATM-Team Zugriff hat, gehostet auf der Infrastruktur von Google. Wir verkaufen oder teilen deine Daten nicht mit Dritten für deren eigene Marketingzwecke.",
     privacyRetentionTitle:"Wie lange wir deine Daten speichern",privacyRetentionText:"Wir speichern deine Daten, solange du Mitglied unserer Community bist oder bis du ihre Löschung beantragst, je nachdem, was zuerst eintritt.",
     privacyRightsTitle:"Deine Rechte",privacyRightsText:'Gemäß der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung oder Export deiner Daten, auf jederzeitigen Widerruf deiner Einwilligung und auf Widerspruch gegen die Verarbeitung. Du kannst auch eine Beschwerde bei deiner Datenschutzbehörde einreichen. Um diese Rechte auszuüben, kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1289,6 +1378,12 @@ const translations={
     privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",footerToolsLink:"Pip-Rechner",
     cookieText:'Wir verwenden essenzielle Cookies, um die ordnungsgemäße Funktion der Website zu gewährleisten, sowie mit deiner Zustimmung Analyse- und Marketing-Cookies, um dein Erlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Du kannst alle Cookies akzeptieren oder nur essenzielle Cookies verwenden. Weitere Informationen findest du in unserer <a href="#privacy">Datenschutzerklärung</a>.',cookieEssential:"Nur essenzielle",cookieAcceptAll:"Alle akzeptieren",
     leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
+    reviewWriteBtn:"Bewertung schreiben",reviewModalTitle:"Teile deine Erfahrung",reviewModalSub:"Erzähl anderen Tradern, was du von PipsATM hältst. Deine Bewertung wird sofort veröffentlicht.",
+    reviewNameLabel:"Dein Name",reviewNameErr:"Bitte gib deinen Namen ein.",reviewLocationLabel:"Ort (optional)",
+    reviewStarsLabel:"Deine Bewertung",reviewStarsErr:"Bitte wähle eine Bewertung aus.",
+    reviewTextLabel:"Deine Bewertung",reviewTextErr:"Bitte schreibe etwas mehr (mindestens 10 Zeichen).",
+    reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",
+    reviewSubmitBtn:"Bewertung veröffentlichen",
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Von PipsATM entwickelte Tools",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
     storeBadgeSubscription:"Abo",storeVipDesc:"Tritt unserer VIP Room bei, um die Märkte zu studieren und in Echtzeit gemeinsam mit unserer professionellen Trade-Analyse zu handeln. Verbessere dein Marktverständnis, lerne fortgeschrittene Price-Action-Konzepte und verfolge live, wie sich jedes Setup entwickelt, statt einfach nur Handelssignalen zu folgen.",storePerMonth:"/ Monat",storeGetAccess:"Zugang erhalten",
@@ -1388,17 +1483,38 @@ function submitLead(evt){
 // Note: the modal is intentionally NOT closable via overlay click or Escape key —
 // leaving email + Telegram username is mandatory before reaching the community.
 
-/* ─── REVIEWS: AUTO-SCROLL + DRAG + LOOP ─── */
-(function initReviews(){
+/* ─── REVIEWS: FETCH + AUTO-SCROLL + DRAG + LOOP ─── */
+
+function escapeHtml(s){
+  return String(s == null ? '' : s).replace(/[&<>"']/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+}
+
+function buildReviewCardEl(r){
+  const stars = Math.max(1, Math.min(5, parseInt(r.stars, 10) || 5));
+  const div = document.createElement('div');
+  div.className = 'review-card';
+  const author = r.location ? escapeHtml(r.name) + ', ' + escapeHtml(r.location) : escapeHtml(r.name);
+  div.innerHTML =
+    '<div class="review-stars">' + '★'.repeat(stars) + '</div>' +
+    '<p class="review-text">"' + escapeHtml(r.text) + '"</p>' +
+    '<div class="review-author">— ' + author + '</div>';
+  return div;
+}
+
+// Rebuilds the clone-set used for the seamless infinite loop. Safe to call
+// again after new original cards are inserted (e.g. a freshly published review).
+function rebuildReviewsLoop(){
   const row = document.getElementById('reviewsRow');
   if(!row) return;
-
-  // Duplicate all cards once for a seamless infinite loop.
-  // Clones keep their data-t attribute, so the language switcher translates them too.
+  row.querySelectorAll('.review-clone').forEach(el => el.remove());
+  row.scrollLeft = 0;
   const originalCards = Array.from(row.children);
-  originalCards.forEach(card => row.appendChild(card.cloneNode(true)));
+  originalCards.forEach(card => {
+    const clone = card.cloneNode(true);
+    clone.classList.add('review-clone');
+    row.appendChild(clone);
+  });
 
-  let setWidth = 0; // exact pixel width of one full set of original cards (incl. gaps)
   function measureSetWidth(){
     if(originalCards.length === 0) return 0;
     const first = originalCards[0];
@@ -1409,52 +1525,63 @@ function submitLead(evt){
   function tryMeasure(attemptsLeft){
     const w = measureSetWidth();
     if(w > 0){
-      setWidth = w;
+      window._reviewsSetWidth = w;
     } else if(attemptsLeft > 0){
       requestAnimationFrame(() => tryMeasure(attemptsLeft - 1));
     }
   }
   tryMeasure(30); // retry across ~30 frames in case fonts/layout settle late
-  window.addEventListener('resize', () => { setWidth = measureSetWidth() || setWidth; });
-  // Re-measure once more after fonts are guaranteed loaded
   if(document.fonts && document.fonts.ready){
-    document.fonts.ready.then(() => { setWidth = measureSetWidth() || setWidth; });
+    document.fonts.ready.then(() => { window._reviewsSetWidth = measureSetWidth() || window._reviewsSetWidth; });
   }
+  window._reviewsScrollAccumulator = row.scrollLeft;
+  window._reviewsMeasure = measureSetWidth;
+}
+
+// Attaches the scroll/drag behaviour once. Re-running rebuildReviewsLoop()
+// afterwards (e.g. to add a new review) does not re-attach listeners.
+function initReviewsCarousel(){
+  const row = document.getElementById('reviewsRow');
+  if(!row || window._reviewsCarouselStarted) return;
+  window._reviewsCarouselStarted = true;
+
+  rebuildReviewsLoop();
 
   let autoScrollPaused = false;
   let isDragging = false;
   let dragStartX = 0;
   let dragStartScroll = 0;
   let dragMoved = false;
-  let scrollAccumulator = row.scrollLeft; // float accumulator — Safari rounds scrollLeft to integers,
-                                           // so sub-pixel increments written directly can be silently dropped.
 
   function wrap(){
+    const setWidth = window._reviewsSetWidth || 0;
     if(setWidth <= 0) return;
-    if(scrollAccumulator >= setWidth){
-      scrollAccumulator -= setWidth;
-      row.scrollLeft = scrollAccumulator;
-    } else if(scrollAccumulator < 0){
-      scrollAccumulator += setWidth;
-      row.scrollLeft = scrollAccumulator;
+    if(window._reviewsScrollAccumulator >= setWidth){
+      window._reviewsScrollAccumulator -= setWidth;
+      row.scrollLeft = window._reviewsScrollAccumulator;
+    } else if(window._reviewsScrollAccumulator < 0){
+      window._reviewsScrollAccumulator += setWidth;
+      row.scrollLeft = window._reviewsScrollAccumulator;
     }
   }
 
   function autoStep(){
-    if(!autoScrollPaused && !isDragging && setWidth > 0){
-      scrollAccumulator += 0.6;
-      row.scrollLeft = Math.round(scrollAccumulator);
+    if(!autoScrollPaused && !isDragging && window._reviewsSetWidth > 0){
+      window._reviewsScrollAccumulator += 0.6;
+      row.scrollLeft = Math.round(window._reviewsScrollAccumulator);
       wrap();
     }
     requestAnimationFrame(autoStep);
   }
   requestAnimationFrame(autoStep);
 
-  // Pause on hover (desktop)
+  window.addEventListener('resize', () => {
+    if(window._reviewsMeasure) window._reviewsSetWidth = window._reviewsMeasure() || window._reviewsSetWidth;
+  });
+
   row.addEventListener('mouseenter', () => autoScrollPaused = true);
   row.addEventListener('mouseleave', () => { if(!isDragging) autoScrollPaused = false; });
 
-  // Drag-to-scroll with mouse
   row.addEventListener('mousedown', (e) => {
     isDragging = true;
     dragMoved = false;
@@ -1468,30 +1595,50 @@ function submitLead(evt){
     const dx = e.pageX - dragStartX;
     if(Math.abs(dx) > 3) dragMoved = true;
     row.scrollLeft = dragStartScroll - dx;
-    scrollAccumulator = row.scrollLeft;
+    window._reviewsScrollAccumulator = row.scrollLeft;
     wrap();
-    scrollAccumulator = row.scrollLeft;
+    window._reviewsScrollAccumulator = row.scrollLeft;
   });
   window.addEventListener('mouseup', () => {
     if(!isDragging) return;
     isDragging = false;
     row.classList.remove('dragging');
     autoScrollPaused = false;
-    scrollAccumulator = row.scrollLeft;
+    window._reviewsScrollAccumulator = row.scrollLeft;
   });
-  // Prevent click-through (e.g. accidental link activation) right after a drag
   row.addEventListener('click', (e) => { if(dragMoved) e.preventDefault(); }, true);
 
-  // Touch support (mobile swipe) — native overflow-x already handles this,
-  // but we pause auto-scroll while the user is touching the row and wrap on scroll.
   row.addEventListener('touchstart', () => autoScrollPaused = true, {passive:true});
   row.addEventListener('touchend', () => { setTimeout(()=>autoScrollPaused=false, 1500); }, {passive:true});
 
-  // Expose for the arrow buttons
   window._reviewsWrap = wrap;
-  window._reviewsSyncAccumulator = () => { scrollAccumulator = row.scrollLeft; };
-  window._reviewsGetSetWidth = () => setWidth;
-})();
+  window._reviewsSyncAccumulator = () => { window._reviewsScrollAccumulator = row.scrollLeft; };
+
+  // Inserts a freshly-published review as an original card (before the clone
+  // set) and rebuilds the loop so it's included in the seamless scroll too.
+  window._reviewsAddCard = function(cardEl){
+    const originalCount = row.children.length / 2;
+    row.insertBefore(cardEl, row.children[originalCount] || null);
+    rebuildReviewsLoop();
+  };
+}
+
+async function loadReviews(){
+  const row = document.getElementById('reviewsRow');
+  if(row && typeof SHEET_WEBHOOK_URL === 'string' && SHEET_WEBHOOK_URL){
+    try{
+      const res = await fetch(SHEET_WEBHOOK_URL, {method:'GET'});
+      const data = await res.json();
+      if(Array.isArray(data)){
+        data.forEach(r => { if(r && r.text) row.appendChild(buildReviewCardEl(r)); });
+      }
+    }catch(err){
+      console.error('[PipsATM] failed to load reviews', err);
+    }
+  }
+  initReviewsCarousel();
+}
+loadReviews();
 
 function scrollReviews(dir) {
   const row = document.getElementById('reviewsRow');
@@ -1501,6 +1648,73 @@ function scrollReviews(dir) {
   row.scrollLeft += dir * step;
   if(window._reviewsWrap) window._reviewsWrap();
   if(window._reviewsSyncAccumulator) window._reviewsSyncAccumulator();
+}
+
+/* ─── WRITE A REVIEW ─── */
+let reviewStarsValue = 0;
+
+function paintStars(v){
+  document.querySelectorAll('#starPicker .star-pick').forEach((el, i) => el.classList.toggle('picked', i < v));
+}
+
+function setReviewStars(v){
+  reviewStarsValue = v;
+  paintStars(v);
+  document.getElementById('reviewStarsErr').style.display = 'none';
+}
+
+function openReviewModal(){
+  document.getElementById('reviewOverlay').classList.add('open');
+  document.getElementById('reviewNameErr').style.display = 'none';
+  document.getElementById('reviewStarsErr').style.display = 'none';
+  document.getElementById('reviewTextErr').style.display = 'none';
+  document.getElementById('reviewConsentErr').style.display = 'none';
+}
+
+function closeReviewModal(){
+  document.getElementById('reviewOverlay').classList.remove('open');
+}
+
+function submitReview(evt){
+  evt.preventDefault();
+  // Honeypot: real users never fill this hidden field, bots often do.
+  if(document.getElementById('reviewHoney').value){
+    closeReviewModal();
+    return false;
+  }
+
+  const name = document.getElementById('reviewName').value.trim();
+  const location = document.getElementById('reviewLocation').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+  const consent = document.getElementById('reviewConsent').checked;
+
+  const nameOk = name.length >= 2;
+  const starsOk = reviewStarsValue >= 1 && reviewStarsValue <= 5;
+  const textOk = text.length >= 10;
+
+  document.getElementById('reviewNameErr').style.display = nameOk ? 'none' : 'block';
+  document.getElementById('reviewStarsErr').style.display = starsOk ? 'none' : 'block';
+  document.getElementById('reviewTextErr').style.display = textOk ? 'none' : 'block';
+  document.getElementById('reviewConsentErr').style.display = consent ? 'none' : 'block';
+  if(!nameOk || !starsOk || !textOk || !consent) return false;
+
+  const reviewData = {
+    type: 'review', name: name, location: location, stars: reviewStarsValue, text: text,
+    capturedAt: new Date().toISOString(), lang: window._lang
+  };
+
+  fetch(SHEET_WEBHOOK_URL, {
+    method: 'POST',
+    headers: {'Content-Type': 'text/plain;charset=utf-8'},
+    body: JSON.stringify(reviewData)
+  }).then(() => {
+    if(window._reviewsAddCard) window._reviewsAddCard(buildReviewCardEl(reviewData));
+  }).catch(err => console.error('[PipsATM] review submission failed', err));
+
+  closeReviewModal();
+  document.getElementById('reviewForm').reset();
+  setReviewStars(0);
+  return false;
 }
 
 /* ─── PARTNER COUPON COPY ─── */

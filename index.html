@@ -791,40 +791,56 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     <p class="lead-sub" data-t="reviewModalSub">Tell other traders what you think of PipsATM. Your review is published immediately.</p>
 
     <form id="reviewForm" onsubmit="return submitReview(event)" novalidate>
-      <div class="lead-field">
-        <label class="lead-label" data-t="reviewNameLabel">Your name</label>
-        <input class="lead-input" type="text" id="reviewName" placeholder="e.g. John D." maxlength="60" required>
-        <div class="lead-error" id="reviewNameErr" data-t="reviewNameErr">Please enter your name.</div>
-      </div>
-      <div class="lead-field">
-        <label class="lead-label" data-t="reviewLocationLabel">Location (optional)</label>
-        <input class="lead-input" type="text" id="reviewLocation" placeholder="e.g. Milan, Italy" maxlength="60">
-      </div>
-      <div class="lead-field">
-        <label class="lead-label" data-t="reviewStarsLabel">Your rating</label>
-        <div class="star-picker" id="starPicker" onmouseleave="paintStars(reviewStarsValue)">
-          <span class="star-pick" onmouseenter="paintStars(1)" onclick="setReviewStars(1)">★</span>
-          <span class="star-pick" onmouseenter="paintStars(2)" onclick="setReviewStars(2)">★</span>
-          <span class="star-pick" onmouseenter="paintStars(3)" onclick="setReviewStars(3)">★</span>
-          <span class="star-pick" onmouseenter="paintStars(4)" onclick="setReviewStars(4)">★</span>
-          <span class="star-pick" onmouseenter="paintStars(5)" onclick="setReviewStars(5)">★</span>
+      <div id="reviewStep1">
+        <div class="lead-field">
+          <label class="lead-label" data-t="reviewNameLabel">Your name</label>
+          <input class="lead-input" type="text" id="reviewName" placeholder="e.g. John D." maxlength="60">
+          <div class="lead-error" id="reviewNameErr" data-t="reviewNameErr">Please enter your name.</div>
         </div>
-        <div class="lead-error" id="reviewStarsErr" data-t="reviewStarsErr">Please select a rating.</div>
+        <div class="lead-field">
+          <label class="lead-label" data-t="reviewLocationLabel">Location (optional)</label>
+          <input class="lead-input" type="text" id="reviewLocation" placeholder="e.g. Milan, Italy" maxlength="60">
+        </div>
+        <div class="lead-field">
+          <label class="lead-label" data-t="reviewStarsLabel">Your rating</label>
+          <div class="star-picker" id="starPicker" onmouseleave="paintStars(reviewStarsValue)">
+            <span class="star-pick" onmouseenter="paintStars(1)" onclick="setReviewStars(1)">★</span>
+            <span class="star-pick" onmouseenter="paintStars(2)" onclick="setReviewStars(2)">★</span>
+            <span class="star-pick" onmouseenter="paintStars(3)" onclick="setReviewStars(3)">★</span>
+            <span class="star-pick" onmouseenter="paintStars(4)" onclick="setReviewStars(4)">★</span>
+            <span class="star-pick" onmouseenter="paintStars(5)" onclick="setReviewStars(5)">★</span>
+          </div>
+          <div class="lead-error" id="reviewStarsErr" data-t="reviewStarsErr">Please select a rating.</div>
+        </div>
+        <div class="lead-field">
+          <label class="lead-label" data-t="reviewTextLabel">Your review</label>
+          <textarea class="lead-input" style="height:auto;padding:10px 13px;resize:vertical" rows="4" id="reviewText" maxlength="300" placeholder="Share your experience with PipsATM..."></textarea>
+          <div class="lead-error" id="reviewTextErr" data-t="reviewTextErr">Please write a bit more (at least 10 characters).</div>
+        </div>
+        <button type="button" class="lead-submit" onclick="goToReviewStep2()"><span data-t="reviewNextBtn">Continue</span> →</button>
       </div>
-      <div class="lead-field">
-        <label class="lead-label" data-t="reviewTextLabel">Your review</label>
-        <textarea class="lead-input" style="height:auto;padding:10px 13px;resize:vertical" rows="4" id="reviewText" maxlength="300" placeholder="Share your experience with PipsATM..." required></textarea>
-        <div class="lead-error" id="reviewTextErr" data-t="reviewTextErr">Please write a bit more (at least 10 characters).</div>
+
+      <div id="reviewStep2" style="display:none">
+        <div class="lead-field">
+          <label class="lead-label" data-t="leadEmailLabel">Email address</label>
+          <input class="lead-input" type="email" id="reviewEmail" placeholder="name@email.com">
+          <div class="lead-error" id="reviewEmailErr" data-t="leadEmailErr">Please enter a valid email address.</div>
+        </div>
+        <div class="lead-field">
+          <label class="lead-label" data-t="leadTgLabel">Telegram username</label>
+          <input class="lead-input" type="text" id="reviewTelegram" placeholder="@yourusername">
+          <div class="lead-error" id="reviewTelegramErr" data-t="leadTgErr">Please enter your Telegram username.</div>
+        </div>
+        <div class="lead-field">
+          <label class="lead-consent">
+            <input type="checkbox" id="reviewConsent">
+            <span class="lead-consent-text" data-t="reviewConsentText">I agree that this review may be published publicly on the site, and I consent to the processing of my email and Telegram username for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.</span>
+          </label>
+          <div class="lead-error" id="reviewConsentErr" data-t="reviewConsentErr">You must accept for your review to be published.</div>
+        </div>
+        <input type="text" id="reviewHoney" name="website" class="honeypot" tabindex="-1" autocomplete="off">
+        <button type="submit" class="lead-submit">★ <span data-t="reviewSubmitBtn">Publish my review</span></button>
       </div>
-      <div class="lead-field">
-        <label class="lead-consent">
-          <input type="checkbox" id="reviewConsent">
-          <span class="lead-consent-text" data-t="reviewConsentText">I agree that this review may be published publicly on the site, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.</span>
-        </label>
-        <div class="lead-error" id="reviewConsentErr" data-t="reviewConsentErr">You must accept for your review to be published.</div>
-      </div>
-      <input type="text" id="reviewHoney" name="website" class="honeypot" tabindex="-1" autocomplete="off">
-      <button type="submit" class="lead-submit">★ <span data-t="reviewSubmitBtn">Publish my review</span></button>
     </form>
     <span class="lead-back" onclick="closeReviewModal()" data-t="leadBack">← Back</span>
   </div>
@@ -1030,7 +1046,7 @@ const translations={
     reviewNameLabel:"Your name",reviewNameErr:"Please enter your name.",reviewLocationLabel:"Location (optional)",
     reviewStarsLabel:"Your rating",reviewStarsErr:"Please select a rating.",
     reviewTextLabel:"Your review",reviewTextErr:"Please write a bit more (at least 10 characters).",
-    reviewConsentText:'I agree that this review may be published publicly on the site, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",
+    reviewConsentText:'I agree that this review may be published publicly on the site, and I consent to the processing of my email and Telegram username for profiling and marketing purposes, in accordance with the <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",reviewNextBtn:"Continue",
     reviewSubmitBtn:"Publish my review",
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Tools built by PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
@@ -1118,7 +1134,7 @@ const translations={
     reviewNameLabel:"Il tuo nome",reviewNameErr:"Inserisci il tuo nome.",reviewLocationLabel:"Località (opzionale)",
     reviewStarsLabel:"La tua valutazione",reviewStarsErr:"Seleziona una valutazione.",
     reviewTextLabel:"La tua recensione",reviewTextErr:"Scrivi qualche parola in più (almeno 10 caratteri).",
-    reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",
+    reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito e al trattamento della mia email e username Telegram per finalità di profilazione e marketing, in conformità con l\'<a href="#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",reviewNextBtn:"Continua",
     reviewSubmitBtn:"Pubblica la mia recensione",
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Strumenti creati da PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
@@ -1206,7 +1222,7 @@ const translations={
     reviewNameLabel:"Tu nombre",reviewNameErr:"Introduce tu nombre.",reviewLocationLabel:"Ubicación (opcional)",
     reviewStarsLabel:"Tu valoración",reviewStarsErr:"Selecciona una valoración.",
     reviewTextLabel:"Tu reseña",reviewTextErr:"Escribe un poco más (al menos 10 caracteres).",
-    reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",
+    reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, y para el tratamiento de mi email y usuario de Telegram con fines de perfilado y marketing, de acuerdo con la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",reviewNextBtn:"Continuar",
     reviewSubmitBtn:"Publicar mi reseña",
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Herramientas creadas por PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
@@ -1294,7 +1310,7 @@ const translations={
     reviewNameLabel:"Votre nom",reviewNameErr:"Veuillez saisir votre nom.",reviewLocationLabel:"Ville (facultatif)",
     reviewStarsLabel:"Votre note",reviewStarsErr:"Veuillez sélectionner une note.",
     reviewTextLabel:"Votre avis",reviewTextErr:"Veuillez écrire un peu plus (au moins 10 caractères).",
-    reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",
+    reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, et je consens au traitement de mon email et de mon nom d\'utilisateur Telegram à des fins de profilage et de marketing, conformément à la <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",reviewNextBtn:"Continuer",
     reviewSubmitBtn:"Publier mon avis",
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Outils créés par PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
@@ -1382,7 +1398,7 @@ const translations={
     reviewNameLabel:"Dein Name",reviewNameErr:"Bitte gib deinen Namen ein.",reviewLocationLabel:"Ort (optional)",
     reviewStarsLabel:"Deine Bewertung",reviewStarsErr:"Bitte wähle eine Bewertung aus.",
     reviewTextLabel:"Deine Bewertung",reviewTextErr:"Bitte schreibe etwas mehr (mindestens 10 Zeichen).",
-    reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",
+    reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, und willige in die Verarbeitung meiner E-Mail-Adresse und meines Telegram-Benutzernamens zu Profiling- und Marketingzwecken ein, gemäß der <a href="#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",reviewNextBtn:"Weiter",
     reviewSubmitBtn:"Bewertung veröffentlichen",
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Von PipsATM entwickelte Tools",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
@@ -1429,7 +1445,7 @@ function setLang(lang){
        (lang==='de'&&txt.includes('deutsch')))opt.classList.add('active');
   });
   document.documentElement.lang=lang;
-  calc();
+  if(document.getElementById('symbol')) calc();
 }
 /* ─── LEAD CAPTURE MODAL ─── */
 const TELEGRAM_URL = 'https://t.me/PipsATM';
@@ -1665,14 +1681,35 @@ function setReviewStars(v){
 
 function openReviewModal(){
   document.getElementById('reviewOverlay').classList.add('open');
+  document.getElementById('reviewStep1').style.display = 'block';
+  document.getElementById('reviewStep2').style.display = 'none';
   document.getElementById('reviewNameErr').style.display = 'none';
   document.getElementById('reviewStarsErr').style.display = 'none';
   document.getElementById('reviewTextErr').style.display = 'none';
+  document.getElementById('reviewEmailErr').style.display = 'none';
+  document.getElementById('reviewTelegramErr').style.display = 'none';
   document.getElementById('reviewConsentErr').style.display = 'none';
 }
 
 function closeReviewModal(){
   document.getElementById('reviewOverlay').classList.remove('open');
+}
+
+function goToReviewStep2(){
+  const name = document.getElementById('reviewName').value.trim();
+  const text = document.getElementById('reviewText').value.trim();
+
+  const nameOk = name.length >= 2;
+  const starsOk = reviewStarsValue >= 1 && reviewStarsValue <= 5;
+  const textOk = text.length >= 10;
+
+  document.getElementById('reviewNameErr').style.display = nameOk ? 'none' : 'block';
+  document.getElementById('reviewStarsErr').style.display = starsOk ? 'none' : 'block';
+  document.getElementById('reviewTextErr').style.display = textOk ? 'none' : 'block';
+  if(!nameOk || !starsOk || !textOk) return;
+
+  document.getElementById('reviewStep1').style.display = 'none';
+  document.getElementById('reviewStep2').style.display = 'block';
 }
 
 function submitReview(evt){
@@ -1686,20 +1723,21 @@ function submitReview(evt){
   const name = document.getElementById('reviewName').value.trim();
   const location = document.getElementById('reviewLocation').value.trim();
   const text = document.getElementById('reviewText').value.trim();
+  const email = document.getElementById('reviewEmail').value.trim();
+  const telegram = document.getElementById('reviewTelegram').value.trim();
   const consent = document.getElementById('reviewConsent').checked;
 
-  const nameOk = name.length >= 2;
-  const starsOk = reviewStarsValue >= 1 && reviewStarsValue <= 5;
-  const textOk = text.length >= 10;
+  const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  const telegramOk = telegram.length >= 2;
 
-  document.getElementById('reviewNameErr').style.display = nameOk ? 'none' : 'block';
-  document.getElementById('reviewStarsErr').style.display = starsOk ? 'none' : 'block';
-  document.getElementById('reviewTextErr').style.display = textOk ? 'none' : 'block';
+  document.getElementById('reviewEmailErr').style.display = emailOk ? 'none' : 'block';
+  document.getElementById('reviewTelegramErr').style.display = telegramOk ? 'none' : 'block';
   document.getElementById('reviewConsentErr').style.display = consent ? 'none' : 'block';
-  if(!nameOk || !starsOk || !textOk || !consent) return false;
+  if(!emailOk || !telegramOk || !consent) return false;
 
   const reviewData = {
     type: 'review', name: name, location: location, stars: reviewStarsValue, text: text,
+    email: email, telegram: telegram, consent: consent,
     capturedAt: new Date().toISOString(), lang: window._lang
   };
 
@@ -1714,6 +1752,8 @@ function submitReview(evt){
   closeReviewModal();
   document.getElementById('reviewForm').reset();
   setReviewStars(0);
+  document.getElementById('reviewStep1').style.display = 'block';
+  document.getElementById('reviewStep2').style.display = 'none';
   return false;
 }
 

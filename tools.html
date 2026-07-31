@@ -232,8 +232,10 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 .store-price-period{font-size:.8rem;color:var(--muted)}
 .store-price-old{font-size:.9rem;color:var(--muted);text-decoration:line-through}
 .store-save-badge{font-size:.68rem;font-weight:700;color:var(--green);background:var(--green-bg);border:1px solid var(--green-border);padding:.15rem .5rem;border-radius:99px}
-.store-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#080C14;padding:.65rem 1.35rem;border-radius:8px;font-size:.88rem;font-weight:700;letter-spacing:.02em;transition:all .2s;align-self:flex-start}
+.store-cta{display:inline-flex;align-items:center;gap:.5rem;background:var(--teal);color:#080C14;padding:.65rem 1.35rem;border-radius:8px;font-size:.88rem;font-weight:700;letter-spacing:.02em;transition:all .2s;align-self:flex-start;border:none;cursor:pointer;font-family:inherit}
 .store-cta:hover{background:#34E0BB;transform:translateY(-1px);box-shadow:0 6px 24px rgba(38,201,168,.2)}
+.store-card.featured{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 8px 32px var(--teal-glow)}
+.store-badge.free{background:var(--teal);color:#080C14;border-color:var(--teal)}
 
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:.75rem}
@@ -604,6 +606,7 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
 
     <span class="lead-back" onclick="closeLeadModal()" data-t="leadBack">← Back</span>
   </div>
+</div>
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-banner-text" data-t="cookieText">We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="index.html#privacy">Privacy Policy</a>.</div>
   <div class="cookie-banner-actions">
@@ -792,6 +795,10 @@ const translations={
     privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",footerToolsLink:"Pip Calculator",
     cookieText:'We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="index.html#privacy">Privacy Policy</a>.',cookieEssential:"Essential only",cookieAcceptAll:"Accept all",
     leadSubmit:"Join the community",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
+    pdfModalTitle:"Get your free PDF",pdfModalSub:"Leave your email and Instagram username to unlock the download.",
+    pdfInstagramLabel:"Instagram username",pdfInstagramErr:"Please enter your Instagram username.",
+    pdfConsentText:'I consent to the processing of my personal data (email and Instagram username) for profiling and marketing purposes, in accordance with the <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',
+    pdfSubmit:"Get my free PDF",
     reviewWriteBtn:"Write a review",reviewModalTitle:"Share your experience",reviewModalSub:"Tell other traders what you think of PipsATM. Your review is published immediately.",
     reviewNameLabel:"Your name",reviewNameErr:"Please enter your name.",reviewLocationLabel:"Location (optional)",
     reviewStarsLabel:"Your rating",reviewStarsErr:"Please select a rating.",
@@ -800,6 +807,7 @@ const translations={
     reviewSubmitBtn:"Publish your review",
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Welcome to PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
+    storePdfName:"Free PDF – Market Structure &amp; High-Probability Setups",storeBadgeFree:"Free",storePdfDesc:"A practical guide to reading market structure and spotting high-probability trading setups — the exact framework professional traders use to enter with confidence instead of guessing.",storeFreePrice:"Free",storeGetPdf:"Get the free PDF",
     storeBadgeSubscription:"Subscription",storeVipDesc:"Join our VIP Room to study the markets and trade in real time alongside our professional trade analysis. Improve your market understanding, learn advanced price action concepts, and watch every setup unfold live instead of simply following trading signals.",storePerMonth:"/ month",storeGetAccess:"Get access",
     storeIndicatorName:"Premium &amp; Discount + Order Blocks Indicator",storeBadgeIndicator:"Indicator",storeIndicatorDesc:"AI-powered Gold 1-minute trading automation with price action detection, order block identification and an integrated breakeven function.",storeSave25:"Save 25%",storeBuyNow:"Buy now",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Install it, set it up and forget it. Manage your open trades on autopilot, with no need to watch the charts all day.",
@@ -880,6 +888,10 @@ const translations={
     privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",footerToolsLink:"Calcolatore Pip",
     cookieText:'Utilizziamo cookie essenziali per garantire il corretto funzionamento del sito e, con il tuo consenso, cookie di analisi e marketing per migliorare la tua esperienza, analizzare il traffico del sito e personalizzare i contenuti. Puoi accettare tutti i cookie oppure utilizzare solo quelli essenziali. Per maggiori informazioni, consulta la nostra <a href="index.html#privacy">Informativa Privacy</a>.',cookieEssential:"Solo essenziali",cookieAcceptAll:"Accetta tutti",
     leadSubmit:"Unisciti alla community",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
+    pdfModalTitle:"Ricevi il tuo PDF gratuito",pdfModalSub:"Lascia la tua email e il tuo username Instagram per sbloccare il download.",
+    pdfInstagramLabel:"Username Instagram",pdfInstagramErr:"Inserisci il tuo username Instagram.",
+    pdfConsentText:'Acconsento al trattamento dei miei dati personali (email e username Instagram) per finalità di profilazione e marketing, in conformità con l\'<a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',
+    pdfSubmit:"Ottieni il mio PDF gratuito",
     reviewWriteBtn:"Scrivi una recensione",reviewModalTitle:"Racconta la tua esperienza",reviewModalSub:"Racconta agli altri trader cosa pensi di PipsATM. La tua recensione viene pubblicata immediatamente.",
     reviewNameLabel:"Il tuo nome",reviewNameErr:"Inserisci il tuo nome.",reviewLocationLabel:"Località (opzionale)",
     reviewStarsLabel:"La tua valutazione",reviewStarsErr:"Seleziona una valutazione.",
@@ -888,6 +900,7 @@ const translations={
     reviewSubmitBtn:"Pubblica la tua recensione",
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Benvenuti in PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
+    storePdfName:"PDF Gratuito – Market Structure e Setup ad Alta Probabilità",storeBadgeFree:"Gratis",storePdfDesc:"Una guida pratica per leggere la market structure e individuare setup ad alta probabilità — lo stesso framework usato dai trader professionisti per entrare con sicurezza, senza tirare a indovinare.",storeFreePrice:"Gratis",storeGetPdf:"Scarica il PDF gratuito",
     storeBadgeSubscription:"Abbonamento",storeVipDesc:"Unisciti alla nostra VIP Room per studiare i mercati e fare trading in tempo reale insieme alle nostre analisi professionali. Migliora la tua comprensione del mercato, impara concetti avanzati di price action e guarda ogni setup svilupparsi dal vivo, invece di limitarti a seguire dei segnali di trading.",storePerMonth:"/ mese",storeGetAccess:"Ottieni accesso",
     storeIndicatorName:"Indicatore Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicatore",storeIndicatorDesc:"Automazione di trading sull'oro a 1 minuto basata su AI, con rilevamento del price action, identificazione degli order block e funzione di breakeven integrata.",storeSave25:"Risparmia 25%",storeBuyNow:"Acquista ora",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installalo, configuralo e dimenticatene. Gestisci le tue posizioni aperte in automatico, senza dover controllare i grafici tutto il giorno.",
@@ -968,6 +981,10 @@ const translations={
     privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",footerToolsLink:"Calculadora de Pips",
     cookieText:'Utilizamos cookies esenciales para garantizar el correcto funcionamiento del sitio web y, con tu consentimiento, cookies de análisis y marketing para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. Puedes aceptar todas las cookies o utilizar solo las esenciales. Para más información, consulta nuestra <a href="index.html#privacy">Política de Privacidad</a>.',cookieEssential:"Solo esenciales",cookieAcceptAll:"Aceptar todas",
     leadSubmit:"Únete a la comunidad",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
+    pdfModalTitle:"Consigue tu PDF gratis",pdfModalSub:"Deja tu email y tu usuario de Instagram para desbloquear la descarga.",
+    pdfInstagramLabel:"Usuario de Instagram",pdfInstagramErr:"Introduce tu usuario de Instagram.",
+    pdfConsentText:'Doy mi consentimiento para el tratamiento de mis datos personales (email y usuario de Instagram) con fines de perfilado y marketing, de acuerdo con la <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',
+    pdfSubmit:"Consigue mi PDF gratis",
     reviewWriteBtn:"Escribe una reseña",reviewModalTitle:"Comparte tu experiencia",reviewModalSub:"Cuéntales a otros traders qué opinas de PipsATM. Tu reseña se publica de inmediato.",
     reviewNameLabel:"Tu nombre",reviewNameErr:"Introduce tu nombre.",reviewLocationLabel:"Ubicación (opcional)",
     reviewStarsLabel:"Tu valoración",reviewStarsErr:"Selecciona una valoración.",
@@ -976,6 +993,7 @@ const translations={
     reviewSubmitBtn:"Publicar tu reseña",
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Bienvenido a PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
+    storePdfName:"PDF Gratis – Estructura de Mercado y Setups de Alta Probabilidad",storeBadgeFree:"Gratis",storePdfDesc:"Una guía práctica para leer la estructura del mercado e identificar setups de alta probabilidad — el mismo marco que usan los traders profesionales para operar con confianza, sin adivinar.",storeFreePrice:"Gratis",storeGetPdf:"Descarga el PDF gratis",
     storeBadgeSubscription:"Suscripción",storeVipDesc:"Únete a nuestra VIP Room para estudiar los mercados y operar en tiempo real junto a nuestro análisis profesional de trading. Mejora tu comprensión del mercado, aprende conceptos avanzados de price action y observa cómo se desarrolla cada setup en vivo, en lugar de limitarte a seguir señales de trading.",storePerMonth:"/ mes",storeGetAccess:"Obtener acceso",
     storeIndicatorName:"Indicador Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicador",storeIndicatorDesc:"Automatización de trading en oro a 1 minuto impulsada por IA, con detección de price action, identificación de order blocks y función de breakeven integrada.",storeSave25:"Ahorra 25%",storeBuyNow:"Comprar ahora",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Instálalo, configúralo y olvídate. Gestiona tus operaciones abiertas en piloto automático, sin necesidad de mirar los gráficos todo el día.",
@@ -1056,6 +1074,10 @@ const translations={
     privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",footerToolsLink:"Calculateur de Pips",
     cookieText:'Nous utilisons des cookies essentiels pour garantir le bon fonctionnement du site et, avec votre consentement, des cookies d\'analyse et de marketing pour améliorer votre expérience, analyser le trafic du site et personnaliser le contenu. Vous pouvez accepter tous les cookies ou utiliser uniquement les cookies essentiels. Pour plus d\'informations, consultez notre <a href="index.html#privacy">Politique de Confidentialité</a>.',cookieEssential:"Essentiels uniquement",cookieAcceptAll:"Tout accepter",
     leadSubmit:"Rejoindre la communauté",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
+    pdfModalTitle:"Recevez votre PDF gratuit",pdfModalSub:"Laissez votre email et votre nom d'utilisateur Instagram pour débloquer le téléchargement.",
+    pdfInstagramLabel:"Nom d'utilisateur Instagram",pdfInstagramErr:"Veuillez indiquer votre nom d'utilisateur Instagram.",
+    pdfConsentText:'Je consens au traitement de mes données personnelles (email et nom d\'utilisateur Instagram) à des fins de profilage et de marketing, conformément à la <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',
+    pdfSubmit:"Recevoir mon PDF gratuit",
     reviewWriteBtn:"Laisser un avis",reviewModalTitle:"Partagez votre expérience",reviewModalSub:"Dites aux autres traders ce que vous pensez de PipsATM. Votre avis est publié immédiatement.",
     reviewNameLabel:"Votre nom",reviewNameErr:"Veuillez saisir votre nom.",reviewLocationLabel:"Ville (facultatif)",
     reviewStarsLabel:"Votre note",reviewStarsErr:"Veuillez sélectionner une note.",
@@ -1064,6 +1086,7 @@ const translations={
     reviewSubmitBtn:"Publier votre avis",
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Bienvenue sur PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
+    storePdfName:"PDF Gratuit – Structure de Marché et Setups à Forte Probabilité",storeBadgeFree:"Gratuit",storePdfDesc:"Un guide pratique pour lire la structure de marché et repérer les setups à forte probabilité — le cadre exact utilisé par les traders professionnels pour entrer avec confiance, sans deviner.",storeFreePrice:"Gratuit",storeGetPdf:"Télécharger le PDF gratuit",
     storeBadgeSubscription:"Abonnement",storeVipDesc:"Rejoignez notre VIP Room pour étudier les marchés et trader en temps réel aux côtés de notre analyse professionnelle. Améliorez votre compréhension du marché, apprenez des concepts avancés de price action et regardez chaque setup se dérouler en direct, plutôt que de simplement suivre des signaux de trading.",storePerMonth:"/ mois",storeGetAccess:"Obtenir l'accès",
     storeIndicatorName:"Indicateur Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicateur",storeIndicatorDesc:"Automatisation du trading sur l'or en 1 minute basée sur l'IA, avec détection du price action, identification des order blocks et fonction de breakeven intégrée.",storeSave25:"Économisez 25%",storeBuyNow:"Acheter maintenant",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installez-le, configurez-le et oubliez-le. Gérez vos positions ouvertes en pilote automatique, sans avoir à surveiller les graphiques toute la journée.",
@@ -1144,6 +1167,10 @@ const translations={
     privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",footerToolsLink:"Pip-Rechner",
     cookieText:'Wir verwenden essenzielle Cookies, um die ordnungsgemäße Funktion der Website zu gewährleisten, sowie mit deiner Zustimmung Analyse- und Marketing-Cookies, um dein Erlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Du kannst alle Cookies akzeptieren oder nur essenzielle Cookies verwenden. Weitere Informationen findest du in unserer <a href="index.html#privacy">Datenschutzerklärung</a>.',cookieEssential:"Nur essenzielle",cookieAcceptAll:"Alle akzeptieren",
     leadSubmit:"Der Community beitreten",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
+    pdfModalTitle:"Hol dir dein kostenloses PDF",pdfModalSub:"Hinterlasse deine E-Mail und deinen Instagram-Benutzernamen, um den Download freizuschalten.",
+    pdfInstagramLabel:"Instagram-Benutzername",pdfInstagramErr:"Bitte gib deinen Instagram-Benutzernamen ein.",
+    pdfConsentText:'Ich stimme der Verarbeitung meiner personenbezogenen Daten (E-Mail und Instagram-Benutzername) zu Profiling- und Marketingzwecken gemäß der <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a> zu.',
+    pdfSubmit:"Mein kostenloses PDF erhalten",
     reviewWriteBtn:"Bewertung schreiben",reviewModalTitle:"Teile deine Erfahrung",reviewModalSub:"Erzähl anderen Tradern, was du von PipsATM hältst. Deine Bewertung wird sofort veröffentlicht.",
     reviewNameLabel:"Dein Name",reviewNameErr:"Bitte gib deinen Namen ein.",reviewLocationLabel:"Ort (optional)",
     reviewStarsLabel:"Deine Bewertung",reviewStarsErr:"Bitte wähle eine Bewertung aus.",
@@ -1152,6 +1179,7 @@ const translations={
     reviewSubmitBtn:"Deine Bewertung veröffentlichen",
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Willkommen bei PipsATM",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
+    storePdfName:"Kostenloses PDF – Marktstruktur &amp; Setups mit hoher Erfolgswahrscheinlichkeit",storeBadgeFree:"Kostenlos",storePdfDesc:"Ein praktischer Leitfaden, um die Marktstruktur zu lesen und Setups mit hoher Erfolgswahrscheinlichkeit zu erkennen — das gleiche Framework, das professionelle Trader nutzen, um sicher einzusteigen, statt zu raten.",storeFreePrice:"Kostenlos",storeGetPdf:"Kostenloses PDF holen",
     storeBadgeSubscription:"Abo",storeVipDesc:"Tritt unserer VIP Room bei, um die Märkte zu studieren und in Echtzeit gemeinsam mit unserer professionellen Trade-Analyse zu handeln. Verbessere dein Marktverständnis, lerne fortgeschrittene Price-Action-Konzepte und verfolge live, wie sich jedes Setup entwickelt, statt einfach nur Handelssignalen zu folgen.",storePerMonth:"/ Monat",storeGetAccess:"Zugang erhalten",
     storeIndicatorName:"Premium &amp; Discount + Order Blocks Indikator",storeBadgeIndicator:"Indikator",storeIndicatorDesc:"KI-gestützte Gold-Trading-Automatisierung auf dem 1-Minuten-Chart mit Price-Action-Erkennung, Order-Block-Identifikation und integrierter Breakeven-Funktion.",storeSave25:"25% sparen",storeBuyNow:"Jetzt kaufen",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installieren, einrichten und vergessen. Verwalte deine offenen Trades im Autopilot, ohne den ganzen Tag die Charts beobachten zu müssen.",
@@ -1204,6 +1232,7 @@ function setLang(lang){
 }
 /* ─── LEAD CAPTURE MODAL ─── */
 const TELEGRAM_URL = 'https://t.me/PipsATM';
+const FREE_PDF_URL = 'https://whop.com/joined/pipsatm/products/freepdf/';
 // Google Apps Script Web App URL that appends leads to a Google Sheet. Set after deploying the script.
 const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxXSlkhKTRbjIRWEsCN96xUyfwcf7vw-z-zmqt9t9F8kLLG4amIJ6kS82YKIkJndBIJig/exec';
 

@@ -598,19 +598,12 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
         </label>
         <div class="lead-error" id="leadConsentErr" data-t="leadConsentErr">You must accept the data processing consent to continue.</div>
       </div>
-      <div class="lead-error" id="leadPrepareErr" data-t="prepareErr" style="display:none">Something went wrong, please try again.</div>
-      <button type="submit" class="lead-submit" id="leadSubmitBtn">✈ <span data-t="leadSubmit">Continue to Telegram</span></button>
+      <button type="submit" class="lead-submit" id="leadSubmitBtn">✈ <span data-t="leadSubmit">Join the community</span></button>
     </form>
     <div class="lead-note" id="leadNote" data-t="leadNote">We respect your privacy. No spam, ever.</div>
 
-    <div id="leadPending" style="display:none">
-      <p class="lead-sub" data-t="leadPendingText">Almost done! Open Telegram and press Start to confirm and join the community.</p>
-      <a id="leadTelegramLink" class="lead-submit" href="#" target="_blank" style="display:flex;align-items:center;justify-content:center;gap:.4rem;text-decoration:none">✈ <span data-t="leadPendingBtn">Open Telegram</span></a>
-    </div>
-
     <span class="lead-back" onclick="closeLeadModal()" data-t="leadBack">← Back</span>
   </div>
-</div>
 <div class="cookie-banner" id="cookieBanner">
   <div class="cookie-banner-text" data-t="cookieText">We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="index.html#privacy">Privacy Policy</a>.</div>
   <div class="cookie-banner-actions">
@@ -790,7 +783,7 @@ const translations={
     privacyControllerTitle:"Data controller",privacyControllerText:'The data controller is TradingPartners S.R.L.S. For any question about this policy or your data, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Data we collect",privacyDataText:"When you opt in to join our Telegram community, we collect the email address and Telegram username you provide in the sign-up form.",
     privacyBasisTitle:"Purpose and legal basis",privacyBasisText:"We process this data to grant you access to our Telegram community and to send you updates, offers and marketing communications related to our services (profiling), based on the explicit consent you give by checking the consent box before submitting the form (Art. 6(1)(a) GDPR).",
-    privacyReviewsTitle:"Reviews you submit",privacyReviewsText:'If you submit a review through the "Write a review" form, we ask you to confirm via Telegram before it goes live. The name, location, rating and text you provide are then published publicly in the Reviews section of this site, based on the consent you give before submitting. Do not include information you don\'t want to be public. You can request removal of a review at any time by contacting us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyReviewsTitle:"Reviews you submit",privacyReviewsText:'If you submit a review through the "Write a review" form, the name, location, rating and text you provide are published publicly in the Reviews section of this site, based on the consent you give before submitting. Do not include information you don\'t want to be public. You can request removal of a review at any time by contacting us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Where your data is stored",privacyStorageText:"Submitted data is stored in a Google Sheets spreadsheet accessible only to PipsATM staff, hosted on Google's infrastructure. We do not sell or share your data with third parties for their own marketing purposes.",
     privacyRetentionTitle:"How long we keep your data",privacyRetentionText:"We keep your data for as long as you remain a member of our community or until you request its deletion, whichever comes first.",
     privacyRightsTitle:"Your rights",privacyRightsText:'Under the GDPR, you have the right to access, correct, delete or export your data, to withdraw your consent at any time, and to object to the processing. You can also file a complaint with your local data protection authority. To exercise these rights, contact us at <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -798,15 +791,13 @@ const translations={
     privacyChangesTitle:"Changes to this policy",privacyChangesText:"We may update this policy from time to time. Any changes will be published on this page.",
     privacyUpdated:"Last updated: July 2026",footerPrivacyLink:"Privacy Policy",footerToolsLink:"Pip Calculator",
     cookieText:'We use essential cookies to ensure the website functions properly and, with your consent, analytics and marketing cookies to improve your experience, analyze website traffic, and personalize content. You can accept all cookies or use only essential cookies. For more information, please see our <a href="index.html#privacy">Privacy Policy</a>.',cookieEssential:"Essential only",cookieAcceptAll:"Accept all",
-    leadSubmit:"Continue to Telegram",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
-    leadPendingText:"Almost done! Open Telegram and press Start to confirm and join the community.",leadPendingBtn:"Open Telegram",
-    reviewWriteBtn:"Write a review",reviewModalTitle:"Share your experience",reviewModalSub:"Tell other traders what you think of PipsATM. You'll confirm via Telegram before it's published.",
-    reviewPendingText:"Almost done! Open Telegram and press Start to confirm and publish your review.",reviewPendingBtn:"Open Telegram",prepareErr:"Something went wrong, please try again.",
+    leadSubmit:"Join the community",leadNote:"We respect your privacy. No spam, ever.",leadBack:"← Back",
+    reviewWriteBtn:"Write a review",reviewModalTitle:"Share your experience",reviewModalSub:"Tell other traders what you think of PipsATM. Your review is published immediately.",
     reviewNameLabel:"Your name",reviewNameErr:"Please enter your name.",reviewLocationLabel:"Location (optional)",
     reviewStarsLabel:"Your rating",reviewStarsErr:"Please select a rating.",
     reviewTextLabel:"Your review",reviewTextErr:"Please write a bit more (at least 10 characters).",
     reviewConsentText:'I agree that this review may be published publicly on the site, and I consent to the processing of my email and Telegram username for profiling and marketing purposes, in accordance with the <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Privacy Policy</a>.',reviewConsentErr:"You must accept for your review to be published.",reviewNextBtn:"Continue",reviewLangLabel:"Review language",reviewFilterAll:"All reviews",reviewFilterByLang:"Filter by language",
-    reviewSubmitBtn:"Publish my review",
+    reviewSubmitBtn:"Publish your review",
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Welcome to PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
     storeBadgeSubscription:"Subscription",storeVipDesc:"Join our VIP Room to study the markets and trade in real time alongside our professional trade analysis. Improve your market understanding, learn advanced price action concepts, and watch every setup unfold live instead of simply following trading signals.",storePerMonth:"/ month",storeGetAccess:"Get access",
@@ -880,7 +871,7 @@ const translations={
     privacyControllerTitle:"Titolare del trattamento",privacyControllerText:'Il titolare del trattamento è TradingPartners S.R.L.S. Per qualsiasi domanda su questa informativa o sui tuoi dati, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Dati raccolti",privacyDataText:"Quando aderisci alla nostra community su Telegram, raccogliamo l'indirizzo email e lo username Telegram che inserisci nel modulo di iscrizione.",
     privacyBasisTitle:"Finalità e base giuridica",privacyBasisText:"Trattiamo questi dati per darti accesso alla nostra community Telegram e per inviarti aggiornamenti, offerte e comunicazioni di marketing relative ai nostri servizi (profilazione), sulla base del consenso esplicito che presti spuntando la casella prima di inviare il modulo (art. 6.1.a GDPR).",
-    privacyReviewsTitle:"Recensioni che invii",privacyReviewsText:'Se invii una recensione tramite il modulo "Scrivi una recensione", ti chiediamo di confermare tramite Telegram prima che venga pubblicata. Il nome, la località, la valutazione e il testo che fornisci vengono poi pubblicati pubblicamente nella sezione Recensioni di questo sito, sulla base del consenso che presti prima dell\'invio. Non includere informazioni che non vuoi rendere pubbliche. Puoi richiedere la rimozione di una recensione in qualsiasi momento scrivendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyReviewsTitle:"Recensioni che invii",privacyReviewsText:'Se invii una recensione tramite il modulo "Scrivi una recensione", il nome, la località, la valutazione e il testo che fornisci vengono pubblicati pubblicamente nella sezione Recensioni di questo sito, sulla base del consenso che presti prima dell\'invio. Non includere informazioni che non vuoi rendere pubbliche. Puoi richiedere la rimozione di una recensione in qualsiasi momento scrivendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Dove conserviamo i tuoi dati",privacyStorageText:"I dati inviati vengono conservati in un foglio Google Sheets accessibile solo allo staff PipsATM, ospitato sull'infrastruttura Google. Non vendiamo né condividiamo i tuoi dati con terzi per loro finalità di marketing.",
     privacyRetentionTitle:"Per quanto tempo conserviamo i tuoi dati",privacyRetentionText:"Conserviamo i tuoi dati finché resti membro della nostra community o fino a quando non richiedi la cancellazione, a seconda di cosa avviene prima.",
     privacyRightsTitle:"I tuoi diritti",privacyRightsText:'Ai sensi del GDPR, hai diritto di accedere, correggere, cancellare o esportare i tuoi dati, di revocare il consenso in qualsiasi momento e di opporti al trattamento. Puoi anche presentare un reclamo al Garante per la protezione dei dati personali. Per esercitare questi diritti, scrivici a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -888,15 +879,13 @@ const translations={
     privacyChangesTitle:"Modifiche a questa informativa",privacyChangesText:"Potremmo aggiornare periodicamente questa informativa. Eventuali modifiche saranno pubblicate in questa pagina.",
     privacyUpdated:"Ultimo aggiornamento: luglio 2026",footerPrivacyLink:"Informativa Privacy",footerToolsLink:"Calcolatore Pip",
     cookieText:'Utilizziamo cookie essenziali per garantire il corretto funzionamento del sito e, con il tuo consenso, cookie di analisi e marketing per migliorare la tua esperienza, analizzare il traffico del sito e personalizzare i contenuti. Puoi accettare tutti i cookie oppure utilizzare solo quelli essenziali. Per maggiori informazioni, consulta la nostra <a href="index.html#privacy">Informativa Privacy</a>.',cookieEssential:"Solo essenziali",cookieAcceptAll:"Accetta tutti",
-    leadSubmit:"Continua su Telegram",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
-    leadPendingText:"Quasi fatto! Apri Telegram e premi Avvia per confermare e unirti alla community.",leadPendingBtn:"Apri Telegram",
-    reviewWriteBtn:"Scrivi una recensione",reviewModalTitle:"Racconta la tua esperienza",reviewModalSub:"Racconta agli altri trader cosa pensi di PipsATM. La confermerai su Telegram prima della pubblicazione.",
-    reviewPendingText:"Quasi fatto! Apri Telegram e premi Avvia per confermare e pubblicare la tua recensione.",reviewPendingBtn:"Apri Telegram",prepareErr:"Qualcosa è andato storto, riprova.",
+    leadSubmit:"Unisciti alla community",leadNote:"Rispettiamo la tua privacy. Niente spam, mai.",leadBack:"← Indietro",
+    reviewWriteBtn:"Scrivi una recensione",reviewModalTitle:"Racconta la tua esperienza",reviewModalSub:"Racconta agli altri trader cosa pensi di PipsATM. La tua recensione viene pubblicata immediatamente.",
     reviewNameLabel:"Il tuo nome",reviewNameErr:"Inserisci il tuo nome.",reviewLocationLabel:"Località (opzionale)",
     reviewStarsLabel:"La tua valutazione",reviewStarsErr:"Seleziona una valutazione.",
     reviewTextLabel:"La tua recensione",reviewTextErr:"Scrivi qualche parola in più (almeno 10 caratteri).",
     reviewConsentText:'Acconsento alla pubblicazione pubblica di questa recensione sul sito e al trattamento della mia email e username Telegram per finalità di profilazione e marketing, in conformità con l\'<a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Informativa Privacy</a>.',reviewConsentErr:"Devi accettare per poter pubblicare la recensione.",reviewNextBtn:"Continua",reviewLangLabel:"Lingua della recensione",reviewFilterAll:"Tutte le recensioni",reviewFilterByLang:"Filtra per lingua",
-    reviewSubmitBtn:"Pubblica la mia recensione",
+    reviewSubmitBtn:"Pubblica la tua recensione",
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Benvenuti in PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
     storeBadgeSubscription:"Abbonamento",storeVipDesc:"Unisciti alla nostra VIP Room per studiare i mercati e fare trading in tempo reale insieme alle nostre analisi professionali. Migliora la tua comprensione del mercato, impara concetti avanzati di price action e guarda ogni setup svilupparsi dal vivo, invece di limitarti a seguire dei segnali di trading.",storePerMonth:"/ mese",storeGetAccess:"Ottieni accesso",
@@ -970,7 +959,7 @@ const translations={
     privacyControllerTitle:"Responsable del tratamiento",privacyControllerText:'El responsable del tratamiento es TradingPartners S.R.L.S. Para cualquier consulta sobre esta política o tus datos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Datos que recopilamos",privacyDataText:"Cuando te unes a nuestra comunidad de Telegram, recopilamos el correo electrónico y el nombre de usuario de Telegram que proporcionas en el formulario de registro.",
     privacyBasisTitle:"Finalidad y base jurídica",privacyBasisText:"Tratamos estos datos para darte acceso a nuestra comunidad de Telegram y para enviarte actualizaciones, ofertas y comunicaciones de marketing relacionadas con nuestros servicios (perfilado), en base al consentimiento explícito que otorgas al marcar la casilla antes de enviar el formulario (art. 6.1.a RGPD).",
-    privacyReviewsTitle:"Reseñas que envías",privacyReviewsText:'Si envías una reseña a través del formulario "Escribe una reseña", te pedimos que la confirmes por Telegram antes de publicarla. El nombre, la ubicación, la valoración y el texto que proporcionas se publican públicamente en la sección de Reseñas de este sitio, en base al consentimiento que otorgas antes de enviarla. No incluyas información que no quieras que sea pública. Puedes solicitar la eliminación de una reseña en cualquier momento escribiendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyReviewsTitle:"Reseñas que envías",privacyReviewsText:'Si envías una reseña a través del formulario "Escribe una reseña", el nombre, la ubicación, la valoración y el texto que proporcionas se publican públicamente en la sección de Reseñas de este sitio, en base al consentimiento que otorgas antes de enviarla. No incluyas información que no quieras que sea pública. Puedes solicitar la eliminación de una reseña en cualquier momento escribiendo a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Dónde se almacenan tus datos",privacyStorageText:"Los datos enviados se almacenan en una hoja de cálculo de Google Sheets accesible solo para el equipo de PipsATM, alojada en la infraestructura de Google. No vendemos ni compartimos tus datos con terceros para sus propios fines de marketing.",
     privacyRetentionTitle:"Cuánto tiempo conservamos tus datos",privacyRetentionText:"Conservamos tus datos mientras seas miembro de nuestra comunidad o hasta que solicites su eliminación, lo que ocurra primero.",
     privacyRightsTitle:"Tus derechos",privacyRightsText:'De acuerdo con el RGPD, tienes derecho a acceder, corregir, eliminar o exportar tus datos, a retirar tu consentimiento en cualquier momento y a oponerte al tratamiento. También puedes presentar una reclamación ante tu autoridad de protección de datos. Para ejercer estos derechos, escríbenos a <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -978,15 +967,13 @@ const translations={
     privacyChangesTitle:"Cambios en esta política",privacyChangesText:"Podemos actualizar esta política periódicamente. Cualquier cambio se publicará en esta página.",
     privacyUpdated:"Última actualización: julio de 2026",footerPrivacyLink:"Política de Privacidad",footerToolsLink:"Calculadora de Pips",
     cookieText:'Utilizamos cookies esenciales para garantizar el correcto funcionamiento del sitio web y, con tu consentimiento, cookies de análisis y marketing para mejorar tu experiencia, analizar el tráfico del sitio y personalizar el contenido. Puedes aceptar todas las cookies o utilizar solo las esenciales. Para más información, consulta nuestra <a href="index.html#privacy">Política de Privacidad</a>.',cookieEssential:"Solo esenciales",cookieAcceptAll:"Aceptar todas",
-    leadSubmit:"Continuar a Telegram",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
-    leadPendingText:"¡Casi listo! Abre Telegram y pulsa Iniciar para confirmar y unirte a la comunidad.",leadPendingBtn:"Abrir Telegram",
-    reviewWriteBtn:"Escribe una reseña",reviewModalTitle:"Comparte tu experiencia",reviewModalSub:"Cuéntales a otros traders qué opinas de PipsATM. La confirmarás por Telegram antes de que se publique.",
-    reviewPendingText:"¡Casi listo! Abre Telegram y pulsa Iniciar para confirmar y publicar tu reseña.",reviewPendingBtn:"Abrir Telegram",prepareErr:"Algo salió mal, inténtalo de nuevo.",
+    leadSubmit:"Únete a la comunidad",leadNote:"Respetamos tu privacidad. Sin spam, nunca.",leadBack:"← Atrás",
+    reviewWriteBtn:"Escribe una reseña",reviewModalTitle:"Comparte tu experiencia",reviewModalSub:"Cuéntales a otros traders qué opinas de PipsATM. Tu reseña se publica de inmediato.",
     reviewNameLabel:"Tu nombre",reviewNameErr:"Introduce tu nombre.",reviewLocationLabel:"Ubicación (opcional)",
     reviewStarsLabel:"Tu valoración",reviewStarsErr:"Selecciona una valoración.",
     reviewTextLabel:"Tu reseña",reviewTextErr:"Escribe un poco más (al menos 10 caracteres).",
     reviewConsentText:'Doy mi consentimiento para que esta reseña se publique públicamente en el sitio, y para el tratamiento de mi email y usuario de Telegram con fines de perfilado y marketing, de acuerdo con la <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Política de Privacidad</a>.',reviewConsentErr:"Debes aceptar para poder publicar la reseña.",reviewNextBtn:"Continuar",reviewLangLabel:"Idioma de la reseña",reviewFilterAll:"Todas las reseñas",reviewFilterByLang:"Filtrar por idioma",
-    reviewSubmitBtn:"Publicar mi reseña",
+    reviewSubmitBtn:"Publicar tu reseña",
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Bienvenido a PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
     storeBadgeSubscription:"Suscripción",storeVipDesc:"Únete a nuestra VIP Room para estudiar los mercados y operar en tiempo real junto a nuestro análisis profesional de trading. Mejora tu comprensión del mercado, aprende conceptos avanzados de price action y observa cómo se desarrolla cada setup en vivo, en lugar de limitarte a seguir señales de trading.",storePerMonth:"/ mes",storeGetAccess:"Obtener acceso",
@@ -1060,7 +1047,7 @@ const translations={
     privacyControllerTitle:"Responsable du traitement",privacyControllerText:'Le responsable du traitement est TradingPartners S.R.L.S. Pour toute question concernant cette politique ou vos données, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Données que nous collectons",privacyDataText:"Lorsque vous rejoignez notre communauté Telegram, nous collectons l'adresse email et le nom d'utilisateur Telegram que vous fournissez dans le formulaire d'inscription.",
     privacyBasisTitle:"Finalité et base juridique",privacyBasisText:"Nous traitons ces données pour vous donner accès à notre communauté Telegram et pour vous envoyer des mises à jour, offres et communications marketing liées à nos services (profilage), sur la base du consentement explicite que vous donnez en cochant la case avant d'envoyer le formulaire (art. 6.1.a RGPD).",
-    privacyReviewsTitle:"Avis que vous publiez",privacyReviewsText:'Si vous soumettez un avis via le formulaire « Laisser un avis », nous vous demandons de confirmer via Telegram avant sa publication. Le nom, la ville, la note et le texte que vous fournissez sont ensuite publiés publiquement dans la section Avis de ce site, sur la base du consentement que vous donnez avant l\'envoi. N\'incluez pas d\'informations que vous ne souhaitez pas rendre publiques. Vous pouvez demander la suppression d\'un avis à tout moment en écrivant à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
+    privacyReviewsTitle:"Avis que vous publiez",privacyReviewsText:'Si vous soumettez un avis via le formulaire « Laisser un avis », le nom, la ville, la note et le texte que vous fournissez sont publiés publiquement dans la section Avis de ce site, sur la base du consentement que vous donnez avant l\'envoi. N\'incluez pas d\'informations que vous ne souhaitez pas rendre publiques. Vous pouvez demander la suppression d\'un avis à tout moment en écrivant à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyStorageTitle:"Où sont stockées vos données",privacyStorageText:"Les données envoyées sont stockées dans une feuille Google Sheets accessible uniquement à l'équipe PipsATM, hébergée sur l'infrastructure de Google. Nous ne vendons ni ne partageons vos données avec des tiers à des fins de marketing.",
     privacyRetentionTitle:"Combien de temps nous conservons vos données",privacyRetentionText:"Nous conservons vos données tant que vous êtes membre de notre communauté ou jusqu'à ce que vous demandiez leur suppression, selon la première éventualité.",
     privacyRightsTitle:"Vos droits",privacyRightsText:'Conformément au RGPD, vous avez le droit d\'accéder à vos données, de les corriger, de les supprimer ou de les exporter, de retirer votre consentement à tout moment et de vous opposer au traitement. Vous pouvez également déposer une plainte auprès de votre autorité de protection des données. Pour exercer ces droits, contactez-nous à <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1068,15 +1055,13 @@ const translations={
     privacyChangesTitle:"Modifications de cette politique",privacyChangesText:"Nous pouvons mettre à jour cette politique de temps à autre. Tout changement sera publié sur cette page.",
     privacyUpdated:"Dernière mise à jour : juillet 2026",footerPrivacyLink:"Politique de Confidentialité",footerToolsLink:"Calculateur de Pips",
     cookieText:'Nous utilisons des cookies essentiels pour garantir le bon fonctionnement du site et, avec votre consentement, des cookies d\'analyse et de marketing pour améliorer votre expérience, analyser le trafic du site et personnaliser le contenu. Vous pouvez accepter tous les cookies ou utiliser uniquement les cookies essentiels. Pour plus d\'informations, consultez notre <a href="index.html#privacy">Politique de Confidentialité</a>.',cookieEssential:"Essentiels uniquement",cookieAcceptAll:"Tout accepter",
-    leadSubmit:"Continuer vers Telegram",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
-    leadPendingText:"Presque terminé ! Ouvrez Telegram et appuyez sur Démarrer pour confirmer et rejoindre la communauté.",leadPendingBtn:"Ouvrir Telegram",
-    reviewWriteBtn:"Laisser un avis",reviewModalTitle:"Partagez votre expérience",reviewModalSub:"Dites aux autres traders ce que vous pensez de PipsATM. Vous confirmerez via Telegram avant sa publication.",
-    reviewPendingText:"Presque terminé ! Ouvrez Telegram et appuyez sur Démarrer pour confirmer et publier votre avis.",reviewPendingBtn:"Ouvrir Telegram",prepareErr:"Une erreur s'est produite, veuillez réessayer.",
+    leadSubmit:"Rejoindre la communauté",leadNote:"Nous respectons votre vie privée. Jamais de spam.",leadBack:"← Retour",
+    reviewWriteBtn:"Laisser un avis",reviewModalTitle:"Partagez votre expérience",reviewModalSub:"Dites aux autres traders ce que vous pensez de PipsATM. Votre avis est publié immédiatement.",
     reviewNameLabel:"Votre nom",reviewNameErr:"Veuillez saisir votre nom.",reviewLocationLabel:"Ville (facultatif)",
     reviewStarsLabel:"Votre note",reviewStarsErr:"Veuillez sélectionner une note.",
     reviewTextLabel:"Votre avis",reviewTextErr:"Veuillez écrire un peu plus (au moins 10 caractères).",
     reviewConsentText:'J\'accepte que cet avis soit publié publiquement sur le site, et je consens au traitement de mon email et de mon nom d\'utilisateur Telegram à des fins de profilage et de marketing, conformément à la <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Politique de Confidentialité</a>.',reviewConsentErr:"Vous devez accepter pour que votre avis soit publié.",reviewNextBtn:"Continuer",reviewLangLabel:"Langue de l'avis",reviewFilterAll:"Tous les avis",reviewFilterByLang:"Filtrer par langue",
-    reviewSubmitBtn:"Publier mon avis",
+    reviewSubmitBtn:"Publier votre avis",
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Bienvenue sur PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
     storeBadgeSubscription:"Abonnement",storeVipDesc:"Rejoignez notre VIP Room pour étudier les marchés et trader en temps réel aux côtés de notre analyse professionnelle. Améliorez votre compréhension du marché, apprenez des concepts avancés de price action et regardez chaque setup se dérouler en direct, plutôt que de simplement suivre des signaux de trading.",storePerMonth:"/ mois",storeGetAccess:"Obtenir l'accès",
@@ -1150,7 +1135,7 @@ const translations={
     privacyControllerTitle:"Verantwortlicher",privacyControllerText:'Verantwortlicher für die Datenverarbeitung ist TradingPartners S.R.L.S. Bei Fragen zu dieser Erklärung oder deinen Daten kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
     privacyDataTitle:"Erhobene Daten",privacyDataText:"Wenn du unserer Telegram-Community beitrittst, erheben wir die E-Mail-Adresse und den Telegram-Benutzernamen, die du im Anmeldeformular angibst.",
     privacyBasisTitle:"Zweck und Rechtsgrundlage",privacyBasisText:"Wir verarbeiten diese Daten, um dir Zugang zu unserer Telegram-Community zu gewähren und dir Updates, Angebote und Marketingmitteilungen zu unseren Dienstleistungen zu senden (Profiling), basierend auf der ausdrücklichen Einwilligung, die du durch Ankreuzen des Kästchens vor dem Absenden des Formulars gibst (Art. 6 Abs. 1 lit. a DSGVO).",
-    privacyReviewsTitle:"Von dir eingereichte Bewertungen",privacyReviewsText:'Wenn du über das Formular „Bewertung schreiben" eine Bewertung einreichst, bitten wir dich, dies über Telegram zu bestätigen, bevor sie veröffentlicht wird. Der Name, der Ort, die Bewertung und der Text, die du angibst, werden anschließend basierend auf der Einwilligung, die du vor dem Absenden gibst, öffentlich im Bewertungsbereich dieser Website veröffentlicht. Gib keine Informationen an, die du nicht öffentlich machen möchtest. Du kannst die Entfernung einer Bewertung jederzeit beantragen, indem du uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a> kontaktierst.',
+    privacyReviewsTitle:"Von dir eingereichte Bewertungen",privacyReviewsText:'Wenn du über das Formular „Bewertung schreiben" eine Bewertung einreichst, werden der Name, der Ort, die Bewertung und der Text, die du angibst, basierend auf der Einwilligung, die du vor dem Absenden gibst, öffentlich im Bewertungsbereich dieser Website veröffentlicht. Gib keine Informationen an, die du nicht öffentlich machen möchtest. Du kannst die Entfernung einer Bewertung jederzeit beantragen, indem du uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a> kontaktierst.',
     privacyStorageTitle:"Wo deine Daten gespeichert werden",privacyStorageText:"Die übermittelten Daten werden in einer Google-Sheets-Tabelle gespeichert, auf die nur das PipsATM-Team Zugriff hat, gehostet auf der Infrastruktur von Google. Wir verkaufen oder teilen deine Daten nicht mit Dritten für deren eigene Marketingzwecke.",
     privacyRetentionTitle:"Wie lange wir deine Daten speichern",privacyRetentionText:"Wir speichern deine Daten, solange du Mitglied unserer Community bist oder bis du ihre Löschung beantragst, je nachdem, was zuerst eintritt.",
     privacyRightsTitle:"Deine Rechte",privacyRightsText:'Gemäß der DSGVO hast du das Recht auf Auskunft, Berichtigung, Löschung oder Export deiner Daten, auf jederzeitigen Widerruf deiner Einwilligung und auf Widerspruch gegen die Verarbeitung. Du kannst auch eine Beschwerde bei deiner Datenschutzbehörde einreichen. Um diese Rechte auszuüben, kontaktiere uns unter <a href="mailto:infopipsatm@gmail.com">infopipsatm@gmail.com</a>.',
@@ -1158,15 +1143,13 @@ const translations={
     privacyChangesTitle:"Änderungen dieser Erklärung",privacyChangesText:"Wir können diese Erklärung von Zeit zu Zeit aktualisieren. Änderungen werden auf dieser Seite veröffentlicht.",
     privacyUpdated:"Letzte Aktualisierung: Juli 2026",footerPrivacyLink:"Datenschutzerklärung",footerToolsLink:"Pip-Rechner",
     cookieText:'Wir verwenden essenzielle Cookies, um die ordnungsgemäße Funktion der Website zu gewährleisten, sowie mit deiner Zustimmung Analyse- und Marketing-Cookies, um dein Erlebnis zu verbessern, den Website-Traffic zu analysieren und Inhalte zu personalisieren. Du kannst alle Cookies akzeptieren oder nur essenzielle Cookies verwenden. Weitere Informationen findest du in unserer <a href="index.html#privacy">Datenschutzerklärung</a>.',cookieEssential:"Nur essenzielle",cookieAcceptAll:"Alle akzeptieren",
-    leadSubmit:"Weiter zu Telegram",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
-    leadPendingText:"Fast fertig! Öffne Telegram und tippe auf Start, um zu bestätigen und der Community beizutreten.",leadPendingBtn:"Telegram öffnen",
-    reviewWriteBtn:"Bewertung schreiben",reviewModalTitle:"Teile deine Erfahrung",reviewModalSub:"Erzähl anderen Tradern, was du von PipsATM hältst. Du bestätigst sie über Telegram, bevor sie veröffentlicht wird.",
-    reviewPendingText:"Fast fertig! Öffne Telegram und tippe auf Start, um zu bestätigen und deine Bewertung zu veröffentlichen.",reviewPendingBtn:"Telegram öffnen",prepareErr:"Etwas ist schiefgelaufen, bitte versuche es erneut.",
+    leadSubmit:"Der Community beitreten",leadNote:"Wir respektieren deine Privatsphäre. Niemals Spam.",leadBack:"← Zurück",
+    reviewWriteBtn:"Bewertung schreiben",reviewModalTitle:"Teile deine Erfahrung",reviewModalSub:"Erzähl anderen Tradern, was du von PipsATM hältst. Deine Bewertung wird sofort veröffentlicht.",
     reviewNameLabel:"Dein Name",reviewNameErr:"Bitte gib deinen Namen ein.",reviewLocationLabel:"Ort (optional)",
     reviewStarsLabel:"Deine Bewertung",reviewStarsErr:"Bitte wähle eine Bewertung aus.",
     reviewTextLabel:"Deine Bewertung",reviewTextErr:"Bitte schreibe etwas mehr (mindestens 10 Zeichen).",
     reviewConsentText:'Ich stimme zu, dass diese Bewertung öffentlich auf der Website veröffentlicht werden darf, und willige in die Verarbeitung meiner E-Mail-Adresse und meines Telegram-Benutzernamens zu Profiling- und Marketingzwecken ein, gemäß der <a href="index.html#privacy" target="_blank" onclick="event.stopPropagation()">Datenschutzerklärung</a>.',reviewConsentErr:"Du musst zustimmen, damit deine Bewertung veröffentlicht wird.",reviewNextBtn:"Weiter",reviewLangLabel:"Sprache der Bewertung",reviewFilterAll:"Alle Bewertungen",reviewFilterByLang:"Nach Sprache filtern",
-    reviewSubmitBtn:"Bewertung veröffentlichen",
+    reviewSubmitBtn:"Deine Bewertung veröffentlichen",
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Willkommen bei PipsATM",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
     storeBadgeSubscription:"Abo",storeVipDesc:"Tritt unserer VIP Room bei, um die Märkte zu studieren und in Echtzeit gemeinsam mit unserer professionellen Trade-Analyse zu handeln. Verbessere dein Marktverständnis, lerne fortgeschrittene Price-Action-Konzepte und verfolge live, wie sich jedes Setup entwickelt, statt einfach nur Handelssignalen zu folgen.",storePerMonth:"/ Monat",storeGetAccess:"Zugang erhalten",
@@ -1221,15 +1204,11 @@ function setLang(lang){
 }
 /* ─── LEAD CAPTURE MODAL ─── */
 const TELEGRAM_URL = 'https://t.me/PipsATM';
-const TELEGRAM_BOT_USERNAME = 'pipsatmadminbot';
 // Google Apps Script Web App URL that appends leads to a Google Sheet. Set after deploying the script.
 const SHEET_WEBHOOK_URL = 'https://script.google.com/macros/s/AKfycbxXSlkhKTRbjIRWEsCN96xUyfwcf7vw-z-zmqt9t9F8kLLG4amIJ6kS82YKIkJndBIJig/exec';
 
 function openLeadModal(){
   document.getElementById('leadOverlay').classList.add('open');
-  document.getElementById('leadForm').style.display = 'block';
-  document.getElementById('leadNote').style.display = 'block';
-  document.getElementById('leadPending').style.display = 'none';
   document.getElementById('leadEmailErr').style.display='none';
   document.getElementById('leadTgErr').style.display='none';
   document.getElementById('leadConsentErr').style.display='none';
@@ -1255,30 +1234,20 @@ function submitLead(evt){
   consentErr.style.display = consent ? 'none' : 'block';
   if(!emailOk || !tgOk || !consent) return false;
 
-  const prepareErr = document.getElementById('leadPrepareErr');
-  prepareErr.style.display = 'none';
-  const btn = document.getElementById('leadSubmitBtn');
-  btn.disabled = true;
-  fetch(SHEET_WEBHOOK_URL, {
-    method: 'POST',
-    headers: {'Content-Type': 'text/plain;charset=utf-8'},
-    body: JSON.stringify({type:'prepare_lead', email: email, telegram: tg, consent: consent, capturedAt: new Date().toISOString(), lang: window._lang})
-  }).then(r => r.json()).then(data => {
-    btn.disabled = false;
-    if(data.result === 'success' && data.token){
-      document.getElementById('leadTelegramLink').href = 'https://t.me/' + TELEGRAM_BOT_USERNAME + '?start=' + data.token;
-      document.getElementById('leadForm').style.display = 'none';
-      document.getElementById('leadNote').style.display = 'none';
-      document.getElementById('leadPending').style.display = 'block';
-    } else {
-      prepareErr.style.display = 'block';
-    }
-  }).catch(err => {
-    btn.disabled = false;
-    console.error('[PipsATM Lead] sheet submission failed', err);
-    prepareErr.style.display = 'block';
-  });
+  if(SHEET_WEBHOOK_URL){
+    fetch(SHEET_WEBHOOK_URL, {
+      method: 'POST',
+      mode: 'no-cors',
+      headers: {'Content-Type': 'text/plain;charset=utf-8'},
+      body: JSON.stringify({email: email, telegram: tg, consent: consent, capturedAt: new Date().toISOString(), lang: window._lang})
+    }).catch(function(err){ console.error('[PipsATM Lead] sheet submission failed', err); });
+  } else {
+    console.log('[PipsATM Lead]', {email: email, telegram: tg, consent: consent, capturedAt: new Date().toISOString()});
+  }
 
+  closeLeadModal();
+  document.getElementById('leadForm').reset();
+  window.open(TELEGRAM_URL, '_blank');
   return false;
 }
 

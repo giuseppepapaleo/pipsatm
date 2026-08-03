@@ -221,7 +221,7 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 
 /* STORE */
 .store-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:1.5rem}
-.store-card{background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s}
+.store-card{position:relative;background:var(--surface);border:1px solid var(--border);border-radius:14px;padding:1.75rem;display:flex;flex-direction:column;gap:1rem;transition:border-color .2s}
 .store-card:hover{border-color:rgba(38,201,168,.3)}
 .store-card-header{display:flex;align-items:flex-start;justify-content:space-between;gap:.75rem}
 .store-name{font-size:1.05rem;font-weight:700;letter-spacing:-.01em;line-height:1.3}
@@ -236,6 +236,8 @@ nav{position:fixed;top:0;left:0;right:0;z-index:100;background:rgba(8,12,20,0.92
 .store-cta:hover{background:#34E0BB;transform:translateY(-1px);box-shadow:0 6px 24px rgba(38,201,168,.2)}
 .store-card.featured{border-color:var(--teal);box-shadow:0 0 0 1px var(--teal),0 8px 32px var(--teal-glow)}
 .store-badge.free{background:var(--teal);color:#080C14;border-color:var(--teal)}
+.store-card.popular{border-color:var(--gold)}
+.store-ribbon{position:absolute;top:-11px;left:50%;transform:translateX(-50%);background:var(--gold);color:#080C14;font-size:.68rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;padding:.3rem .9rem;border-radius:99px;white-space:nowrap;box-shadow:0 4px 14px rgba(240,180,41,.35)}
 
 /* FAQ */
 .faq-list{display:flex;flex-direction:column;gap:.75rem}
@@ -561,7 +563,8 @@ footer{border-top:1px solid var(--border);padding:2rem;text-align:center;font-si
     </div>
 
     <!-- VIP Room -->
-    <div class="store-card">
+    <div class="store-card popular">
+      <span class="store-ribbon" data-t="storeMostWanted">Most Wanted</span>
       <div class="store-card-header">
         <span class="store-name">VIP Room</span>
         <span class="store-badge" data-t="storeBadgeSubscription">Subscription</span>
@@ -1180,6 +1183,7 @@ const translations={
     navHome:"Home",navServices:"Services",navStore:"Store",navReviews:"Reviews",navFaq:"FAQ's",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Welcome to PipsATM",storeSub:"Indicators, EAs and VIP access developed in-house to give you a real edge in the market.",
     storePdfName:"Free PDF – Market Structure &amp; High-Probability Setups",storeBadgeFree:"Free",storePdfDesc:"A practical guide to reading market structure and spotting high-probability trading setups — the exact framework professional traders use to enter with confidence instead of guessing.",storeFreePrice:"Free",storeGetPdf:"Get the free PDF",
+    storeMostWanted:"Most Wanted",
     storeBadgeSubscription:"Subscription",storeVipDesc:"Join our VIP Room to study the markets and trade in real time alongside our professional trade analysis. Improve your market understanding, learn advanced price action concepts, and watch every setup unfold live instead of simply following trading signals.",storePerMonth:"/ month",storeGetAccess:"Get access",
     storeIndicatorName:"Premium &amp; Discount + Order Blocks Indicator",storeBadgeIndicator:"Indicator",storeIndicatorDesc:"AI-powered Gold 1-minute trading automation with price action detection, order block identification and an integrated breakeven function.",storeSave25:"Save 25%",storeBuyNow:"Buy now",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Install it, set it up and forget it. Manage your open trades on autopilot, with no need to watch the charts all day.",
@@ -1273,6 +1277,7 @@ const translations={
     navHome:"Home",navServices:"Servizi",navStore:"Store",navReviews:"Recensioni",navFaq:"FAQ",navTools:"Strumenti",
     storeLabel:"STORE",storeTitle:"Benvenuti in PipsATM",storeSub:"Indicatori, EA e accesso VIP sviluppati internamente per darti un vero vantaggio sul mercato.",
     storePdfName:"PDF Gratuito – Market Structure e Setup ad Alta Probabilità",storeBadgeFree:"Gratis",storePdfDesc:"Una guida pratica per leggere la market structure e individuare setup ad alta probabilità — lo stesso framework usato dai trader professionisti per entrare con sicurezza, senza tirare a indovinare.",storeFreePrice:"Gratis",storeGetPdf:"Scarica il PDF gratuito",
+    storeMostWanted:"Il più richiesto",
     storeBadgeSubscription:"Abbonamento",storeVipDesc:"Unisciti alla nostra VIP Room per studiare i mercati e fare trading in tempo reale insieme alle nostre analisi professionali. Migliora la tua comprensione del mercato, impara concetti avanzati di price action e guarda ogni setup svilupparsi dal vivo, invece di limitarti a seguire dei segnali di trading.",storePerMonth:"/ mese",storeGetAccess:"Ottieni accesso",
     storeIndicatorName:"Indicatore Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicatore",storeIndicatorDesc:"Automazione di trading sull'oro a 1 minuto basata su AI, con rilevamento del price action, identificazione degli order block e funzione di breakeven integrata.",storeSave25:"Risparmia 25%",storeBuyNow:"Acquista ora",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installalo, configuralo e dimenticatene. Gestisci le tue posizioni aperte in automatico, senza dover controllare i grafici tutto il giorno.",
@@ -1366,6 +1371,7 @@ const translations={
     navHome:"Inicio",navServices:"Servicios",navStore:"Tienda",navReviews:"Reseñas",navFaq:"Preguntas Frecuentes",navTools:"Herramientas",
     storeLabel:"TIENDA",storeTitle:"Bienvenido a PipsATM",storeSub:"Indicadores, EAs y acceso VIP desarrollados internamente para darte una ventaja real en el mercado.",
     storePdfName:"PDF Gratis – Estructura de Mercado y Setups de Alta Probabilidad",storeBadgeFree:"Gratis",storePdfDesc:"Una guía práctica para leer la estructura del mercado e identificar setups de alta probabilidad — el mismo marco que usan los traders profesionales para operar con confianza, sin adivinar.",storeFreePrice:"Gratis",storeGetPdf:"Descarga el PDF gratis",
+    storeMostWanted:"El más solicitado",
     storeBadgeSubscription:"Suscripción",storeVipDesc:"Únete a nuestra VIP Room para estudiar los mercados y operar en tiempo real junto a nuestro análisis profesional de trading. Mejora tu comprensión del mercado, aprende conceptos avanzados de price action y observa cómo se desarrolla cada setup en vivo, en lugar de limitarte a seguir señales de trading.",storePerMonth:"/ mes",storeGetAccess:"Obtener acceso",
     storeIndicatorName:"Indicador Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicador",storeIndicatorDesc:"Automatización de trading en oro a 1 minuto impulsada por IA, con detección de price action, identificación de order blocks y función de breakeven integrada.",storeSave25:"Ahorra 25%",storeBuyNow:"Comprar ahora",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Instálalo, configúralo y olvídate. Gestiona tus operaciones abiertas en piloto automático, sin necesidad de mirar los gráficos todo el día.",
@@ -1459,6 +1465,7 @@ const translations={
     navHome:"Accueil",navServices:"Services",navStore:"Boutique",navReviews:"Avis",navFaq:"FAQ",navTools:"Outils",
     storeLabel:"BOUTIQUE",storeTitle:"Bienvenue sur PipsATM",storeSub:"Indicateurs, EA et accès VIP développés en interne pour vous donner un réel avantage sur le marché.",
     storePdfName:"PDF Gratuit – Structure de Marché et Setups à Forte Probabilité",storeBadgeFree:"Gratuit",storePdfDesc:"Un guide pratique pour lire la structure de marché et repérer les setups à forte probabilité — le cadre exact utilisé par les traders professionnels pour entrer avec confiance, sans deviner.",storeFreePrice:"Gratuit",storeGetPdf:"Télécharger le PDF gratuit",
+    storeMostWanted:"Le plus demandé",
     storeBadgeSubscription:"Abonnement",storeVipDesc:"Rejoignez notre VIP Room pour étudier les marchés et trader en temps réel aux côtés de notre analyse professionnelle. Améliorez votre compréhension du marché, apprenez des concepts avancés de price action et regardez chaque setup se dérouler en direct, plutôt que de simplement suivre des signaux de trading.",storePerMonth:"/ mois",storeGetAccess:"Obtenir l'accès",
     storeIndicatorName:"Indicateur Premium &amp; Discount + Order Blocks",storeBadgeIndicator:"Indicateur",storeIndicatorDesc:"Automatisation du trading sur l'or en 1 minute basée sur l'IA, avec détection du price action, identification des order blocks et fonction de breakeven intégrée.",storeSave25:"Économisez 25%",storeBuyNow:"Acheter maintenant",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installez-le, configurez-le et oubliez-le. Gérez vos positions ouvertes en pilote automatique, sans avoir à surveiller les graphiques toute la journée.",
@@ -1552,6 +1559,7 @@ const translations={
     navHome:"Home",navServices:"Leistungen",navStore:"Store",navReviews:"Bewertungen",navFaq:"FAQ",navTools:"Tools",
     storeLabel:"STORE",storeTitle:"Willkommen bei PipsATM",storeSub:"Indikatoren, EAs und VIP-Zugang, intern entwickelt, um dir einen echten Vorteil am Markt zu verschaffen.",
     storePdfName:"Kostenloses PDF – Marktstruktur &amp; Setups mit hoher Erfolgswahrscheinlichkeit",storeBadgeFree:"Kostenlos",storePdfDesc:"Ein praktischer Leitfaden, um die Marktstruktur zu lesen und Setups mit hoher Erfolgswahrscheinlichkeit zu erkennen — das gleiche Framework, das professionelle Trader nutzen, um sicher einzusteigen, statt zu raten.",storeFreePrice:"Kostenlos",storeGetPdf:"Kostenloses PDF holen",
+    storeMostWanted:"Am meisten gefragt",
     storeBadgeSubscription:"Abo",storeVipDesc:"Tritt unserer VIP Room bei, um die Märkte zu studieren und in Echtzeit gemeinsam mit unserer professionellen Trade-Analyse zu handeln. Verbessere dein Marktverständnis, lerne fortgeschrittene Price-Action-Konzepte und verfolge live, wie sich jedes Setup entwickelt, statt einfach nur Handelssignalen zu folgen.",storePerMonth:"/ Monat",storeGetAccess:"Zugang erhalten",
     storeIndicatorName:"Premium &amp; Discount + Order Blocks Indikator",storeBadgeIndicator:"Indikator",storeIndicatorDesc:"KI-gestützte Gold-Trading-Automatisierung auf dem 1-Minuten-Chart mit Price-Action-Erkennung, Order-Block-Identifikation und integrierter Breakeven-Funktion.",storeSave25:"25% sparen",storeBuyNow:"Jetzt kaufen",
     storeEaName:"Trade Manager EA",storeBadgeEa:"EA",storeEaDesc:"Installieren, einrichten und vergessen. Verwalte deine offenen Trades im Autopilot, ohne den ganzen Tag die Charts beobachten zu müssen.",
